@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { __getPostsThunk } from '../../redux/modules/postSlice';
+import { CategoryList } from './MainPosts';
 
 function Category({ post }) {
   const params = useParams();
@@ -16,6 +17,7 @@ function Category({ post }) {
   }, [dispatch]);
 
   console.log(category, posts);
+
   return (
     <div>
       <Header />
@@ -51,32 +53,26 @@ function Category({ post }) {
           </Link>
         </div>
       </CategoryList>
-      <div>catogoryName</div>
-      <div>gridmap</div>
+
+      <div style={{ fontSize: '20px' }}>{category}탭입니다!!!!</div>
+      <Gridposts>gridmap</Gridposts>
     </div>
   );
 }
 
 export default Category;
 
-const CategoryList = styled.nav`
+const Gridposts = styled.div`
+  width: 90%;
+  max-width: 1450px;
+  min-height: 330px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 5%;
+  position: relative;
+  background-color: none;
   display: flex;
-  justify-content: center;
-  border-top: 1px solid #051619;
-  border-bottom: 1px solid #051619;
-  background-color: #eae7de;
-  box-sizing: border-box;
-  overflow: hidden;
-  left: 0;
-  right: 0;
-  font-size: 14px;
-
-  .category-inner {
-    display: flex;
-    white-space: nowrap;
-    overflow: overlay;
-    margin: 0 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: violet;
 `;

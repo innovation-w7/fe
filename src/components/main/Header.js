@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../static/newneekLogo.png';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const toggleButton = () => {
-    const content = document.getElementById('toggleContent');
-    if (content.style.display !== 'none') {
-      content.style.display = 'block';
-    } else {
-      content.style.display = 'none';
-    }
-  };
+  const [visible, setVisible] = useState(false);
+  // const toggleButton = () => {
+  //   const content = document.getElementById('toggleContent');
+  //   if (content.style.display !== 'none') {
+  //     content.style.display = 'block';
+  //   } else {
+  //     content.style.display = 'none';
+  //   }
+  // };
   return (
     <div>
       <Navbar>
@@ -25,16 +26,32 @@ function Header() {
                 <b>찾기</b>
               </button>
             </div>
-            <button type="checkbox" className="mybutton" onClick={toggleButton}>
+            <button
+              type="checkbox"
+              className="mybutton"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
               <span className="emoji">🦔</span>
             </button>
-            <div className="mybutton-toggle" id="toggleContent">
+
+            {/* <div className="mybutton-toggle" id="toggleContent">
               <p className="toggle-content">마이페이지</p>
               <p className="toggle-content">프로필설정</p>
               <p className="toggle-content">로그아웃</p>
-            </div>
+            </div> */}
           </div>
         </div>
+        {visible ? (
+          <div className="mybutton-toggle" id="toggleContent">
+            <p className="toggle-content">마이페이지</p>
+            <p className="toggle-content">프로필설정</p>
+            <p className="toggle-content">로그아웃</p>
+          </div>
+        ) : (
+          <></>
+        )}
       </Navbar>
     </div>
   );
@@ -66,7 +83,7 @@ const Navbar = styled.nav`
     left: 50%;
     cursor: pointer;
     vertical-align: middle;
-    margin-left: 30%;
+    margin-left: 40%;
   }
   .logo-img {
     vertical-align: middle;
@@ -119,10 +136,9 @@ const Navbar = styled.nav`
     position: absolute;
     top: 72px;
     right: 0;
-    z-index: 4;
+    z-index: 1;
     margin-top: 30px;
     margin-right: 8em;
-    display: none;
   }
   .toggle-content {
     display: block;

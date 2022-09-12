@@ -13,7 +13,6 @@ function MainPosts() {
   useEffect(() => {
     dispatch(__getPostsThunk());
   }, [dispatch]);
-  console.log(posts, '?');
 
   posts.map((post) => {
     return <Category post={post} />;
@@ -55,7 +54,7 @@ function MainPosts() {
       </CategoryList>
       <List>
         {posts.map((post) => {
-          return <MainPost post={post} />;
+          return <MainPost post={post} id={post.id} />;
         })}
       </List>
     </div>
@@ -77,7 +76,7 @@ const List = styled.section`
   flex-wrap: wrap;
   align-items: center;
 `;
-const CategoryList = styled.nav`
+export const CategoryList = styled.nav`
   display: flex;
   justify-content: center;
   border-top: 1px solid #051619;

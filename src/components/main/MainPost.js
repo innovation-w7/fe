@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 function MainPost({ post }) {
   return (
     <div>
-      <Post>
-        <h1>{post.title}</h1>
-        <h1>{post.body}</h1>
-        <h1>{post.date}</h1>
-        <h1>{post.category}</h1>
-        <h1>{post.id}</h1>
-      </Post>
+      <Link to={`/detail/${post.id}`} key={post.id} style={{ color: 'black', textDecoration: 'none' }}>
+        <Post>
+          <h1>{post.title}</h1>
+          <h1>{post.body}</h1>
+          <h1>{post.date}</h1>
+          <h1>{post.category}</h1>
+          <h1>{post.id}</h1>
+        </Post>
+      </Link>
     </div>
   );
 }
@@ -26,6 +29,7 @@ const Post = styled.div`
   border-radius: 4px;
   padding: 1rem;
   border: 1px solid black;
+  border-top: none;
 
   &:hover {
     background-color: white;
