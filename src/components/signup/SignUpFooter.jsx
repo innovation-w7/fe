@@ -1,9 +1,18 @@
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-const SignUpFooter = ({ children }) => {
+const SignUpFooter = () => {
+  const { age, terms, privacy } = useSelector((state) => state.signup.terms);
+  const disabled = useMemo(() => {
+    return age && terms && privacy;
+  }, [age, terms, privacy]);
+
   return (
     <Footer>
-      <button disabled={true}>{children}</button>
+      <button type="submit" disabled={!disabled}>
+        가입하기
+      </button>
     </Footer>
   );
 };
@@ -25,6 +34,7 @@ const Footer = styled.footer`
     cursor: pointer;
     position: relative;
     border-radius: 8px;
+    color: white;
     background: #051619;
     border: 1px solid #051619;
     border-top-color: rgb(5, 22, 25);

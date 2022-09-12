@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import React from "react";
 
-const TextField = ({ type, name, ...rest }, ref) => {
+const TextField = ({ type, name, small, ...rest }, ref) => {
   return (
     <Div>
-      <input type={type} name={name} {...rest} ref={ref} />
+      <input
+        className={small ? "alert" : ""}
+        type={type}
+        name={name}
+        {...rest}
+        ref={ref}
+      />
+      {small && <small role="alert">{small}</small>}
     </Div>
   );
 };
@@ -15,6 +22,9 @@ const Div = styled.div`
   margin: 1rem 0;
   position: relative;
 
+  .alert {
+    border: 1px solid #b22222;
+  }
   input {
     display: block;
     width: 100%;
@@ -28,5 +38,18 @@ const Div = styled.div`
     transition: all 0.2s;
     outline: none;
     box-shadow: none;
+  }
+
+  small {
+    display: block;
+    font-size: 12px;
+    margin-top: 0.25rem;
+    color: #b22222;
+  }
+
+  @media screen and (max-width: 1080px) {
+    small {
+      font-size: 10px;
+    }
   }
 `;
