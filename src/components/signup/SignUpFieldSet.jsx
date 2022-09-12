@@ -61,6 +61,7 @@ const SignUpFieldSet = ({ email, password, passwordConfirm, nickname }) => {
         ref={passwordConfirmRef}
         onChange={() => handleChange()}
       />
+
       <TextField
         type="text"
         name="name"

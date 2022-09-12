@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Header } from "../form";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import SignUpFieldSet from "./SignUpFieldSet";
 import SignUpFooter from "./SignUpFooter";
 import SignUpTerms from "./SignUpTerms";
@@ -15,11 +15,13 @@ const SignUpForm = () => {
     passwordConfirm: "",
     nickname: "",
   });
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  const checkValidation = () => {
     const { email, password, passwordConfirm, nickname } = data;
     const emailReg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    const nicknameReg = /^([가-힣]{1,}|[a-zA-Z]{2,})$/i;
     setAlert({
       email: "",
       password: "",
@@ -29,59 +31,77 @@ const SignUpForm = () => {
 
     if (!email) {
       setAlert((cur) => {
-        const newAlert = { ...cur };
-        newAlert.email = "이메일 주소를 입력해주세요.";
-        return newAlert;
+        return { ...cur, email: "이메일 주소를 입력해주세요." };
       });
     } else if (!emailReg.test(email)) {
       setAlert((cur) => {
-        const newAlert = { ...cur };
-        newAlert.email = "이메일 형식이 아니에요!";
-        return newAlert;
+        return { ...cur, email: "이메일 형식이 아니에요!" };
       });
     }
-    if (password !== passwordConfirm) {
-      console.log("비밀번호가 달라요.");
+    if (password && passwordConfirm && password !== passwordConfirm) {
+      setAlert((cur) => {
+        return {
+          ...cur,
+          password: "비밀번호가 달라요.",
+          passwordConfirm: "비밀번호가 달라요.",
+        };
+      });
     }
 
     if (!password) {
       setAlert((cur) => {
-        const newAlert = { ...cur };
-        newAlert.password = "비밀번호를 입력해주세요.";
-        return newAlert;
+        return { ...cur, password: "비밀번호를 입력해주세요." };
       });
     } else if (password.length < 8) {
       setAlert((cur) => {
-        const newAlert = { ...cur };
-        newAlert.password = "비밀번호는 8자 이상 가능해요.";
-        return newAlert;
+        return { ...cur, password: "비밀번호는 8자 이상 가능해요." };
       });
     }
 
     if (!passwordConfirm) {
       setAlert((cur) => {
-        const newAlert = { ...cur };
-        newAlert.passwordConfirm = "비밀번호를 입력해주세요.";
-        return newAlert;
+        return { ...cur, passwordConfirm: "비밀번호를 입력해주세요." };
       });
     } else if (passwordConfirm.length < 8) {
       setAlert((cur) => {
-        const newAlert = { ...cur };
-        newAlert.passwordConfirm = "비밀번호는 8자 이상 가능해요.";
-        return newAlert;
+        return {
+          ...cur,
+          passwordConfirm: "비밀번호는 8자 이상 가능해요.",
+        };
       });
     }
 
     if (!nickname) {
       setAlert((cur) => {
-        const newAlert = { ...cur };
-        newAlert.nickname = "이름을 입력해주세요.";
-        return newAlert;
+        return { ...cur, nickname: "이름을 입력해주세요." };
+      });
+    } else if (!nicknameReg.test(nickname)) {
+      setAlert((cur) => {
+        return {
+          ...cur,
+          nickname: "이름은 1글자 이상의 한글, 2글자 이상의 영문만 가능해요!",
+        };
       });
     }
 
-    console.log({ ...data, subscribe });
+    return;
   };
+
+  const validation = useMemo(() => {
+    const { email, password, passwordConfirm, nickname } = alert;
+    return email || password || passwordConfirm || nickname;
+  }, [alert]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    checkValidation();
+    if (validation) {
+      console.log("회원가입 실패");
+    } else {
+      console.log("회원가입 성공");
+    }
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Header />

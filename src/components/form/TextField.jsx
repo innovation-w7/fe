@@ -43,7 +43,7 @@ const Div = styled.div`
   small {
     display: block;
     font-size: 12px;
-    margin-top: 0.25rem;
+    margin: 0.5rem 0;
     color: #b22222;
   }
 
