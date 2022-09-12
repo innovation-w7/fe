@@ -1,0 +1,72 @@
+import styled from "styled-components";
+
+const Google = () => {
+  return (
+    <LoginSocial>
+      <button type="button" class="login-social-google secondary-button">
+        <span>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/logo-google.c9d299ae.svg`}
+            alt=""
+          />
+        </span>
+        구글로 시작하기
+      </button>
+    </LoginSocial>
+  );
+};
+
+export default Google;
+
+const LoginSocial = styled.div`
+  button:not(:active),
+  button:not(:focus) {
+    outline: 0;
+  }
+
+  .login-social-google {
+    display: -webkit-flex !important;
+    display: flex !important;
+    -webkit-align-items: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    text-align: left;
+  }
+
+  .secondary-button {
+    display: inline-block;
+    min-width: 104px;
+    background: #ff6b00;
+    padding: 10px 1.5rem 11px;
+    border-radius: 0;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid #051619;
+    box-sizing: border-box;
+    background: #fff;
+    color: #051619;
+  }
+  button {
+    font: inherit;
+  }
+
+  .login-social-google span {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+  }
+
+  button > * {
+    pointer-events: none;
+  }
+`;

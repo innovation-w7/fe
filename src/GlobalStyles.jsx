@@ -27,9 +27,6 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
   }
 
-  
-  
-
   input, textarea {
   -webkit-appearance: none;
     }
