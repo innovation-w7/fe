@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import React from "react";
 
-const TextField = ({ type, name, ...rest }) => {
+const TextField = ({ type, name, ...rest }, ref) => {
   return (
     <Div>
-      <input type={type} name={name} {...rest} />
+      <input type={type} name={name} {...rest} ref={ref} />
     </Div>
   );
 };
 
-export default TextField;
+export default React.forwardRef(TextField);
 
 const Div = styled.div`
   margin: 1rem 0;
