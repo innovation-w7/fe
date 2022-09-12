@@ -3,8 +3,9 @@ import Header from './Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { __getPostsThunk } from '../../redux/modules/postSlice';
+
 import { CategoryList } from './MainPosts';
+import Detail from '../detail/Detail';
 
 function Category({ post }) {
   const params = useParams();
@@ -12,9 +13,9 @@ function Category({ post }) {
   const { posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(__getPostsThunk());
-  }, [dispatch]);
+  //   useEffect(() => {
+  //     dispatch(__getPostsDetailThunk());
+  //   }, [dispatch]);
 
   console.log(category, posts);
 
@@ -55,7 +56,11 @@ function Category({ post }) {
       </CategoryList>
 
       <div style={{ fontSize: '20px' }}>{category}탭입니다!!!!</div>
-      <Gridposts>gridmap</Gridposts>
+      <Gridposts>
+        {posts.data?.map((post) => {
+          return <Detail post={post} id={post.id} />;
+        })}
+      </Gridposts>
     </div>
   );
 }

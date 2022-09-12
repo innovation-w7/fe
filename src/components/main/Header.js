@@ -5,14 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   const [visible, setVisible] = useState(false);
-  // const toggleButton = () => {
-  //   const content = document.getElementById('toggleContent');
-  //   if (content.style.display !== 'none') {
-  //     content.style.display = 'block';
-  //   } else {
-  //     content.style.display = 'none';
-  //   }
-  // };
+
   return (
     <div>
       <Navbar>
@@ -35,12 +28,6 @@ function Header() {
             >
               <span className="emoji">🦔</span>
             </button>
-
-            {/* <div className="mybutton-toggle" id="toggleContent">
-              <p className="toggle-content">마이페이지</p>
-              <p className="toggle-content">프로필설정</p>
-              <p className="toggle-content">로그아웃</p>
-            </div> */}
           </div>
         </div>
         {visible ? (

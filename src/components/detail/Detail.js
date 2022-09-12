@@ -9,8 +9,9 @@ function Detail() {
   const params = useParams();
   const id = params.id;
   console.log(id);
+  console.log(posts.data);
 
-  const { title, body, date, category } = posts.filter((post) => post.id == id)[0];
+  const { title, content, date, category } = posts.data.filter((post) => post.id == id)[0];
 
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
@@ -20,7 +21,7 @@ function Detail() {
         <p className="title">{title}</p>
         <p>{date}</p>
       </Posthead>
-      <Postbody>{body}</Postbody>
+      <Postbody>{content}</Postbody>
       <p>🧡좋았슴 [갯수]</p>
     </div>
   );

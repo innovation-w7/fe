@@ -4,19 +4,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { __getPostsThunk } from '../../redux/modules/postSlice';
 import MainPost from './MainPost';
 import { Link } from 'react-router-dom';
-import Category from './Category';
+//import Category from './Category';
+import Loading from '../../pages/Loading';
 
 function MainPosts() {
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(__getPostsThunk());
   }, [dispatch]);
 
-  posts.map((post) => {
-    return <Category post={post} />;
-  });
+  console.log(posts, '메인화면!!');
+  // posts.map((post) => {
+  //   return <Category post={post} />;
+  // });
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
@@ -53,7 +59,7 @@ function MainPosts() {
         </div>
       </CategoryList>
       <List>
-        {posts.map((post) => {
+        {posts.data?.map((post) => {
           return <MainPost post={post} id={post.id} />;
         })}
       </List>

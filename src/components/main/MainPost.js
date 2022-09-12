@@ -1,15 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 function MainPost({ post }) {
+  const { posts, isLoading } = useSelector((state) => state.posts);
+  console.log(posts);
   return (
     <div>
       <Link to={`/detail/${post.id}`} key={post.id} style={{ color: 'black', textDecoration: 'none' }}>
         <Post>
-          <h1>{post.title}</h1>
-          <h1>{post.body}</h1>
+          <p className="title">{post.title}</p>
+          <br />
+          <h1>{post.contentSum}</h1>
+          <br />
           <h1>{post.date}</h1>
+          <br />
           <h1>{post.category}</h1>
           <h1>{post.id}</h1>
         </Post>
@@ -34,5 +39,9 @@ const Post = styled.div`
   &:hover {
     background-color: white;
     cursor: pointer;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 700;
   }
 `;
