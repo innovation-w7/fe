@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../../static/newneekLogo.png';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const toggleButton = () => {
@@ -15,9 +16,9 @@ function Header() {
     <div>
       <Navbar>
         <div className="navbar-inner">
-          <div className="logo">
+          <Link to={`/`} className="logo">
             <img className="logo-img" src={logo} alt="뉴닉!" />
-          </div>
+          </Link>
           <div className="nav-container">
             <div className="nav-search">
               <button className="search-button">

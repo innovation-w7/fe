@@ -7,6 +7,9 @@ function MainPost({ post }) {
       <Post>
         <h1>{post.title}</h1>
         <h1>{post.body}</h1>
+        <h1>{post.date}</h1>
+        <h1>{post.category}</h1>
+        <h1>{post.id}</h1>
       </Post>
     </div>
   );
@@ -25,7 +28,7 @@ const Post = styled.div`
   border: 1px solid black;
 
   &:hover {
-    opacity: 0.5;
+    background-color: white;
     cursor: pointer;
   }
 `;

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import dochi from '../../static/hiDochi.png';
-import MainList from './MainList';
 
 function MainIntro() {
   return (
@@ -43,7 +42,6 @@ function MainIntro() {
           </div>
         </SubscribeHead>
       </header>
-      <MainList />
     </div>
   );
 }
