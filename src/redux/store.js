@@ -1,9 +1,10 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import thunk from "redux-thunk";
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
+import posts from './modules/postSlice';
 
 const middlewares = [thunk];
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({ posts });
 
 const store = configureStore({
   reducer: rootReducer,
