@@ -1,14 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
 function MainPost({ post }) {
-  const { posts, isLoading } = useSelector((state) => state.posts);
-  console.log(posts);
+  const category1 = [
+    { category: '정치', icon: '⚖️' },
+    { category: '경제', icon: '💰' },
+    { category: '세계', icon: '🌐 ' },
+    { category: '테크', icon: '🤖 ' },
+    { category: '노동', icon: '💪 ' },
+    { category: '환경', icon: '🌱' },
+    { category: '인권', icon: '🤝 ' },
+    { category: '문화', icon: '🎞 ' },
+    { category: '라이프', icon: '🧘 ' },
+  ];
+
+  function findIcon(element) {
+    if (element.category == post.category) {
+      return element.icon;
+    }
+  }
+  const { icon } = category1.filter(findIcon)[0];
+
   return (
     <div>
       <Link to={`/detail/${post.id}`} key={post.id} style={{ color: 'black', textDecoration: 'none' }}>
         <Post>
+          <p className="icon">{icon}</p>
+          <br />
           <p className="title">{post.title}</p>
           <br />
           <h1>{post.contentSum}</h1>
@@ -43,5 +62,8 @@ const Post = styled.div`
   .title {
     font-size: 18px;
     font-weight: 700;
+  }
+  .icon {
+    font-size: 30px;
   }
 `;

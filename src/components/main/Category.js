@@ -1,65 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import instance from '../../shared/api';
 
-import { CategoryList } from './MainPosts';
-import Detail from '../detail/Detail';
+import CategoryList from './CategoryList';
+
+import MainPost from './MainPost';
 
 function Category({ post }) {
   const params = useParams();
   const category = params.category;
-  const { posts } = useSelector((state) => state.posts);
-  const dispatch = useDispatch();
+  const [categoryList, setCategoryList] = useState({});
+  const getCatogories = async () => {
+    const { data } = await instance.get(`/news/category/${category}`);
 
-  //   useEffect(() => {
-  //     dispatch(__getPostsDetailThunk());
-  //   }, [dispatch]);
+    setCategoryList({ ...data });
+  };
 
-  console.log(category, posts);
+  console.log(categoryList);
+
+  useEffect(() => {
+    getCatogories();
+  }, [category]);
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#eae7de' }}>
       <Header />
-      <CategoryList>
-        <div className="category-inner">
-          <Link to={`/`}>전체</Link>
-          <Link to={`/tag/politics`}>
-            <span>⚖️ 정치</span>{' '}
-          </Link>{' '}
-          <Link to={`/tag/economy`}>
-            <span>💰 경제</span>{' '}
-          </Link>
-          <Link to={`/tag/world`}>
-            <span>🌐 세계</span>{' '}
-          </Link>{' '}
-          <Link to={`/tag/tech`}>
-            <span>🤖 테크</span>{' '}
-          </Link>{' '}
-          <Link to={`/tag/labor`}>
-            <span>💪 노동</span>{' '}
-          </Link>{' '}
-          <Link to={`/tag/environment`}>
-            <span>🌱 환경</span>{' '}
-          </Link>{' '}
-          <Link to={`/tag/social-rights`}>
-            <span>🤝 인권</span>{' '}
-          </Link>{' '}
-          <Link to={`/tag/culture`}>
-            <span>🎞 문화</span>
-          </Link>
-          <Link to={`/tag/life`}>
-            <span> 🧘 라이프</span>
-          </Link>
-        </div>
-      </CategoryList>
+      <CategoryList />
 
-      <div style={{ fontSize: '20px' }}>{category}탭입니다!!!!</div>
       <Gridposts>
-        {posts.data?.map((post) => {
-          return <Detail post={post} id={post.id} />;
+        {categoryList.data?.map((post) => {
+          return <MainPost post={post} id={post.id} />;
         })}
+        <div></div>
       </Gridposts>
     </div>
   );
@@ -70,14 +45,33 @@ export default Category;
 const Gridposts = styled.div`
   width: 90%;
   max-width: 1450px;
-  min-height: 330px;
+  min-height: 800px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0px 5%;
+  padding: 0px 16%;
   position: relative;
   background-color: none;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: violet;
+`;
+const Post = styled.div`
+  background-color: #eae7de;
+  display: flex;
+  flex-direction: column;
+  height: 340px;
+  width: 305px;
+  border-radius: 4px;
+  padding: 1rem;
+  border: 1px solid black;
+  border-top: none;
+
+  &:hover {
+    background-color: white;
+    cursor: pointer;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+  }
 `;

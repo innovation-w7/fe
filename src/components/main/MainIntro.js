@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import dochi from '../../static/hiDochi.png';
+import instance from '../../shared/api';
+import { useNavigate } from 'react-router-dom';
 
 function MainIntro() {
+  const navigate = useNavigate();
+  const [subscribe, setSubscribe] = useState();
+
+  const onChangeHandler = (e) => {
+    const {
+      target: { value, name },
+    } = e;
+    setSubscribe({ ...subscribe, [name]: value });
+  };
+
+  console.log(subscribe, '섭스크라이브 내용');
+
+  const subscribePost = async (subscribe) => {
+    try {
+      const { data } = await instance.post('/main/subscribe', subscribe);
+      navigate('/');
+      console.log(data);
+    } catch (error) {
+      alert(error.response.data.error.message);
+    }
+  };
   return (
     <div>
       <header style={{ backgroundColor: '#eae7de', position: 'relative' }}>
@@ -25,10 +48,10 @@ function MainIntro() {
             </p>
             <Subscribe>
               <div className="input">
-                <input className="text-field" name="email" placeholder="이메일" />
+                <input className="text-field" name="email" onChange={onChangeHandler} placeholder="이메일" />
               </div>
               <div style={{ marginTop: '0.5rem' }}>
-                <input className="text-field" type="text" name="nickname" placeholder="닉네임" />
+                <input className="text-field" type="text" name="nickname" onChange={onChangeHandler} placeholder="닉네임" />
               </div>
               <div className="checkbox">
                 <input type="checkbox" id="subscribeAgree" name="subscribeAgree" />
@@ -36,7 +59,9 @@ function MainIntro() {
                   <span style={{ textDecorationLine: 'underline' }}>개인정보 수집·이용</span>에 동의합니다
                 </label>
                 <p />
-                <button className="subscribe-button">뉴스레터 무료로 구독하기</button>
+                <button onClick={subscribePost} className="subscribe-button">
+                  뉴스레터 무료로 구독하기
+                </button>
               </div>
             </Subscribe>
           </div>

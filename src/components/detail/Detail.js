@@ -1,28 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Header from '../main/Header';
+import instance from '../../shared/api';
 
 function Detail() {
-  const { posts } = useSelector((state) => state.posts);
   const params = useParams();
-  const id = params.id;
-  console.log(id);
-  console.log(posts.data);
+  const { id } = params;
+  const [detail, setDetail] = useState({});
 
-  const { title, content, date, category } = posts.data.filter((post) => post.id == id)[0];
+  const detailGet = async () => {
+    const { data } = await instance.get(`/news/${id}`);
+    setDetail(data.data);
+  };
+  useEffect(() => {
+    detailGet();
+  }, [id]);
 
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
       <Header />
       <Posthead>
-        <p>{category}</p>
-        <p className="title">{title}</p>
-        <p>{date}</p>
+        <p>{detail.category}</p>
+        <p className="title">{detail.title}</p>
+        <p>{detail.date}</p>
       </Posthead>
-      <Postbody>{content}</Postbody>
-      <p>🧡좋았슴 [갯수]</p>
+      <Postbody>{detail.content}</Postbody>
+      <Postbody>🧡좋았슴 {detail.likeCnt}</Postbody>
     </div>
   );
 }
