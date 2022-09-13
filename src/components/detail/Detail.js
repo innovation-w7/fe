@@ -16,7 +16,7 @@ function Detail() {
   useEffect(() => {
     detailGet();
   }, [id]);
-
+  console.log(detail.content, '디테일컨텐츠');
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
       <Header />

@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import dochi from '../../static/hiDochi.png';
 import instance from '../../shared/api';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import __yesSubcribe from '../../redux/modules/postSlice';
 
 function MainIntro() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [subscribe, setSubscribe] = useState();
 
   const onChangeHandler = (e) => {
@@ -17,14 +20,15 @@ function MainIntro() {
 
   console.log(subscribe, '섭스크라이브 내용');
 
-  const subscribePost = async (subscribe) => {
-    try {
-      const { data } = await instance.post('/main/subscribe', subscribe);
-      navigate('/');
-      console.log(data);
-    } catch (error) {
-      alert(error.response.data.error.message);
-    }
+  const subscribePost = () => {
+    dispatch(__yesSubcribe(subscribe));
+
+    // try {
+    //   const { data } = await instance.post('/main/subscribe', subscribe);
+    //   console.log(data, '섭스크랍 성공?');
+    // } catch (error) {
+    //   alert(error.response.data.error.message);
+    // }
   };
   return (
     <div>
@@ -54,12 +58,12 @@ function MainIntro() {
                 <input className="text-field" type="text" name="nickname" onChange={onChangeHandler} placeholder="닉네임" />
               </div>
               <div className="checkbox">
-                <input type="checkbox" id="subscribeAgree" name="subscribeAgree" />
+                <input type="checkbox" />
                 <label>
                   <span style={{ textDecorationLine: 'underline' }}>개인정보 수집·이용</span>에 동의합니다
                 </label>
                 <p />
-                <button onClick={subscribePost} className="subscribe-button">
+                <button type="submit" onClick={subscribePost} className="subscribe-button">
                   뉴스레터 무료로 구독하기
                 </button>
               </div>

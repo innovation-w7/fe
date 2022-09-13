@@ -18,6 +18,18 @@ export const __getPostsThunk = createAsyncThunk('GET_POSTS', async (payload, thu
   }
 });
 
+export const __yesSubcribe = createAsyncThunk('YES_SUBSCRIBE', async (payload, thunkAPI) => {
+  try {
+    console.log(payload, '페이로드');
+
+    const { data } = await instance.post('/main/subscribe', payload);
+    console.log(data, '데이타!');
+    return thunkAPI.fulfillWithValue(data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 export const postSlice = createSlice({
   name: 'posts',
   initialState,
@@ -32,6 +44,20 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
     [__getPostsThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__yesSubcribe.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      if (action.payload.error) {
+        alert('구독을 다시 신청해주세요!');
+        document.location.href = '/';
+      }
+    },
+    [__yesSubcribe.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__yesSubcribe.pending]: (state) => {
       state.isLoading = true;
     },
   },

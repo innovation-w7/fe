@@ -10,7 +10,6 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/loading" element={<Loading />} />
         <Route path="/tag/:category" element={<Category />} />
         <Route path="/detail/:id" element={<Detail />} />
       </Routes>
