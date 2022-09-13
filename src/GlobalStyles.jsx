@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     font-feature-settings: normal;
     font-variation-settings: normal;
     text-rendering: optimizeLegibility;
-    overflow-y:hidden;
+    
   }
 
   body {

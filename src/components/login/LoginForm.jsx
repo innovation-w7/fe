@@ -43,7 +43,7 @@ const LoginForm = () => {
 
     if (!emailAlert || !passwordAlert) {
       await api
-        .post("/api/user/login", {
+        .post("/user/login", {
           email: email,
           password: password,
         })

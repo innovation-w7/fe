@@ -7,7 +7,7 @@ import { api } from "../../shared/api";
 export const __login = createAsyncThunk(
   "log/LOGIN_LOG",
   async (payload, thunkAPI) => {
-    const response = await api.post("/api/user/login", payload);
+    const response = await api.post("/user/login", payload);
     // 토큰 localstorge 저장하기
     localStorage.setItem("authorization", response.headers.authorization);
     localStorage.setItem("refresh-token", response.headers["refresh-token"]);
