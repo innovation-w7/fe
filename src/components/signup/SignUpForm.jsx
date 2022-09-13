@@ -1,28 +1,40 @@
-import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import { Header } from "../form";
-import { useMemo, useState } from "react";
+import { useState, useEffect } from "react";
+import { api } from "../../shared/api";
+import { useNavigate } from "react-router-dom";
 import SignUpFieldSet from "./SignUpFieldSet";
 import SignUpFooter from "./SignUpFooter";
 import SignUpTerms from "./SignUpTerms";
 
 const SignUpForm = () => {
-  const data = useSelector((state) => state.signup.data);
+  const navigate = useNavigate();
+  const { email, password, passwordConfirm, nickname } = useSelector(
+    (state) => state.signup.data
+  );
   const { subscribe } = useSelector((state) => state.signup.terms);
-  const [alert, setAlert] = useState({
+  const [message, setMessage] = useState({
     email: "",
     password: "",
     passwordConfirm: "",
     nickname: "",
   });
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access-token");
+    if (accessToken) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   const checkValidation = () => {
-    const { email, password, passwordConfirm, nickname } = data;
+    let isAbleToPost = true;
     const emailReg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
     const nicknameReg = /^([가-힣]{1,}|[a-zA-Z]{2,})$/i;
-    setAlert({
+    setMessage({
       email: "",
       password: "",
       passwordConfirm: "",
@@ -30,82 +42,110 @@ const SignUpForm = () => {
     });
 
     if (!email) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return { ...cur, email: "이메일 주소를 입력해주세요." };
       });
+      isAbleToPost = false;
     } else if (!emailReg.test(email)) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return { ...cur, email: "이메일 형식이 아니에요!" };
       });
+      isAbleToPost = false;
     }
     if (password && passwordConfirm && password !== passwordConfirm) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return {
           ...cur,
           password: "비밀번호가 달라요.",
           passwordConfirm: "비밀번호가 달라요.",
         };
       });
+      isAbleToPost = false;
     }
 
     if (!password) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return { ...cur, password: "비밀번호를 입력해주세요." };
       });
+      isAbleToPost = false;
     } else if (password.length < 8) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return { ...cur, password: "비밀번호는 8자 이상 가능해요." };
       });
+      isAbleToPost = false;
     }
 
     if (!passwordConfirm) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return { ...cur, passwordConfirm: "비밀번호를 입력해주세요." };
       });
+      isAbleToPost = false;
     } else if (passwordConfirm.length < 8) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return {
           ...cur,
           passwordConfirm: "비밀번호는 8자 이상 가능해요.",
         };
       });
+      isAbleToPost = false;
     }
 
     if (!nickname) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return { ...cur, nickname: "이름을 입력해주세요." };
       });
+      isAbleToPost = false;
     } else if (!nicknameReg.test(nickname)) {
-      setAlert((cur) => {
+      setMessage((cur) => {
         return {
           ...cur,
           nickname: "이름은 1글자 이상의 한글, 2글자 이상의 영문만 가능해요!",
         };
       });
+      isAbleToPost = false;
     }
-
-    return;
+    console.log(isAbleToPost);
+    return isAbleToPost;
   };
-
-  const validation = useMemo(() => {
-    const { email, password, passwordConfirm, nickname } = alert;
-    return email || password || passwordConfirm || nickname;
-  }, [alert]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    checkValidation();
-    if (validation) {
-      console.log("회원가입 실패");
-    } else {
-      console.log("회원가입 성공");
+    if (checkValidation()) {
+      api
+        .post("/api/user/signup", {
+          email: email,
+          password: password,
+          passwordConfirm: passwordConfirm,
+          nickname: nickname,
+          isSubscribe: subscribe,
+        })
+        .then((res) => {
+          if (res.data.success) {
+            api
+              .post("/api/user/login", {
+                email: email,
+                password: password,
+              })
+              .then((loginRes) => {
+                if (loginRes.data.success) {
+                  localStorage.setItem(
+                    "access-token",
+                    loginRes.headers["access-token"]
+                  );
+                  navigate("/");
+                } else {
+                  alert(loginRes.data.error.message);
+                }
+              });
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
-
   return (
     <Form onSubmit={handleSubmit}>
       <Header />
-      <SignUpFieldSet {...alert} />
+      <SignUpFieldSet {...message} />
       <SignUpTerms />
       <SignUpFooter />
     </Form>

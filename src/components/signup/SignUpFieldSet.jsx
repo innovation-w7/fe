@@ -47,7 +47,6 @@ const SignUpFieldSet = ({ email, password, passwordConfirm, nickname }) => {
         type="password"
         name="password"
         placeholder="비밀번호 (8자 이상)"
-        minLength="8"
         small={password}
         ref={passwordRef}
         onChange={() => handleChange()}
@@ -56,7 +55,6 @@ const SignUpFieldSet = ({ email, password, passwordConfirm, nickname }) => {
         type="password"
         name="passwordConfirm"
         placeholder="비밀번호 확인 (8자 이상)"
-        minLength="8"
         small={passwordConfirm}
         ref={passwordConfirmRef}
         onChange={() => handleChange()}
