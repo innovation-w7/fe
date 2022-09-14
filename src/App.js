@@ -4,7 +4,7 @@ import Loading from "./pages/Loading";
 import Main from "./pages/Main";
 import Detail from "./components/detail/Detail";
 import CategoryList from "./components/main/CategoryList";
-import { LoginPage, SignUpPage, ForgotPage } from "./pages";
+import { LoginPage, SignUpPage, ForgotPage, MyPage } from "./pages";
 function App() {
   return (
     <div>
@@ -15,6 +15,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/profile" element={<MyPage />} />
         <Route path="/forgot" element={<ForgotPage />} />
       </Routes>
     </div>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import dochi from '../../static/hiDochi.png';
-import instance from '../../shared/api';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import dochi from "../../static/hiDochi.png";
+import api from "../../shared/api";
+import { useNavigate } from "react-router-dom";
 
 function MainIntro() {
   const navigate = useNavigate();
@@ -15,12 +15,12 @@ function MainIntro() {
     setSubscribe({ ...subscribe, [name]: value });
   };
 
-  console.log(subscribe, '섭스크라이브 내용');
+  console.log(subscribe, "섭스크라이브 내용");
 
   const subscribePost = async (subscribe) => {
     try {
-      const { data } = await instance.post('/main/subscribe', subscribe);
-      navigate('/');
+      const { data } = await api.post("/main/subscribe", subscribe);
+      navigate("/");
       console.log(data);
     } catch (error) {
       alert(error.response.data.error.message);
@@ -28,35 +28,57 @@ function MainIntro() {
   };
   return (
     <div>
-      <header style={{ backgroundColor: '#eae7de', position: 'relative' }}>
+      <header style={{ backgroundColor: "#eae7de", position: "relative" }}>
         <Hellodochi>
           <img className="dochi-img" src={dochi} alt="고슴도치!" />
         </Hellodochi>
         <TitleBox>
           <div className="title-inner">
-            우리가 시간이 없지, <span className="title-inner2">세상이 안 궁금하냐!</span>
+            우리가 시간이 없지,{" "}
+            <span className="title-inner2">세상이 안 궁금하냐!</span>
           </div>
         </TitleBox>
         <SubscribeHead>
           <div className="sub-inner">
             <p>✨지금 491,556명이 뉴닉을 읽고 있어요</p>
 
-            <p style={{ marginTop: '1rem' }}>
-              세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 바쁜 게 우리 탓은 아니잖아요!&nbsp;
+            <p style={{ marginTop: "1rem" }}>
+              세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 바쁜 게 우리
+              탓은 아니잖아요!&nbsp;
               <br />
-              <span className="desktop-block">월/화/수/목/금 아침마다 세상 돌아가는 소식을 메일로 받아보세요.</span>
+              <span className="desktop-block">
+                월/화/수/목/금 아침마다 세상 돌아가는 소식을 메일로 받아보세요.
+              </span>
             </p>
             <Subscribe>
               <div className="input">
-                <input className="text-field" name="email" onChange={onChangeHandler} placeholder="이메일" />
+                <input
+                  className="text-field"
+                  name="email"
+                  onChange={onChangeHandler}
+                  placeholder="이메일"
+                />
               </div>
-              <div style={{ marginTop: '0.5rem' }}>
-                <input className="text-field" type="text" name="nickname" onChange={onChangeHandler} placeholder="닉네임" />
+              <div style={{ marginTop: "0.5rem" }}>
+                <input
+                  className="text-field"
+                  type="text"
+                  name="nickname"
+                  onChange={onChangeHandler}
+                  placeholder="닉네임"
+                />
               </div>
               <div className="checkbox">
-                <input type="checkbox" id="subscribeAgree" name="subscribeAgree" />
+                <input
+                  type="checkbox"
+                  id="subscribeAgree"
+                  name="subscribeAgree"
+                />
                 <label>
-                  <span style={{ textDecorationLine: 'underline' }}>개인정보 수집·이용</span>에 동의합니다
+                  <span style={{ textDecorationLine: "underline" }}>
+                    개인정보 수집·이용
+                  </span>
+                  에 동의합니다
                 </label>
                 <p />
                 <button onClick={subscribePost} className="subscribe-button">

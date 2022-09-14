@@ -6,3 +6,4 @@ export {
   SignUpForm,
 } from "./signup";
 export { Google, LoginFooter, LoginForm } from "./login";
+export { Navbar } from "./profile";
