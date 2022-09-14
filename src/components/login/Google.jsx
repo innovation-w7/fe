@@ -1,27 +1,26 @@
-import styled from "styled-components";
-import GoogleLogin from "react-google-login";
-import { gapi } from "gapi-script";
-import { useEffect } from "react";
+import styled from 'styled-components';
+import GoogleLogin from 'react-google-login';
+import { gapi } from 'gapi-script';
+import { useEffect } from 'react';
 const Google = () => {
   useEffect(() => {
     function start() {
       gapi.client.init({
         clientId,
-        scope: "email",
+        scope: 'email',
       });
     }
 
-    gapi.load("client:auth2", start);
+    gapi.load('client:auth2', start);
   }, []);
-  const clientId =
-    "893727311597-528p6s979bj28k9ru1qkg0tulrtsll0s.apps.googleusercontent.com";
+  const clientId = '893727311597-528p6s979bj28k9ru1qkg0tulrtsll0s.apps.googleusercontent.com';
 
   const onSuccess = (res) => {
     console.log(res);
   };
 
   const onFailure = (res) => {
-    console.log("err", res);
+    console.log('err', res);
   };
 
   return (
@@ -29,15 +28,9 @@ const Google = () => {
       <GoogleLogin
         clientId={clientId}
         render={(props) => (
-          <button
-            onClick={props.onClick}
-            className="google-button secondary-button"
-          >
+          <button onClick={props.onClick} className="google-button secondary-button">
             <span>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/logo-google.svg`}
-                alt=""
-              />
+              <img src={`${process.env.PUBLIC_URL}/images/logo-google.svg`} alt="" />
             </span>
             구글로 시작하기
           </button>

@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router-dom";
-import Category from "./components/main/Category";
-import Loading from "./pages/Loading";
-import Main from "./pages/Main";
-import Detail from "./components/detail/Detail";
-import CategoryList from "./components/main/CategoryList";
-import { LoginPage, SignUpPage, ForgotPage } from "./pages";
+import { Routes, Route } from 'react-router-dom';
+import Category from './components/main/Category';
+import Main from './pages/Main';
+import Detail from './components/detail/Detail';
+import { LoginPage, SignUpPage, ForgotPage } from './pages';
+import MyLike from './components/detail/MyLike';
+
 function App() {
   return (
     <div>
@@ -15,6 +15,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot" element={<ForgotPage />} />
+        <Route path="/mylike" element={<MyLike />} />
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import dochi from '../../static/hiDochi.png';
-import instance from '../../shared/api';
+import { api } from '../../shared/api';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import __yesSubcribe from '../../redux/modules/postSlice';
@@ -24,7 +24,7 @@ function MainIntro() {
     dispatch(__yesSubcribe(subscribe));
 
     // try {
-    //   const { data } = await instance.post('/main/subscribe', subscribe);
+    //   const { data } = await api.post('/main/subscribe', subscribe);
     //   console.log(data, '섭스크랍 성공?');
     // } catch (error) {
     //   alert(error.response.data.error.message);
@@ -92,6 +92,7 @@ const Hellodochi = styled.div`
     top: auto;
     bottom: auto;
     margin: -2rem auto auto;
+    margin-right: 1px;
     position: relative;
     max-width: 480px;
     z-index: 4;

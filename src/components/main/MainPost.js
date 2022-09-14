@@ -30,9 +30,9 @@ function MainPost({ post }) {
           <br />
           <p className="title">{post.title}</p>
           <br />
-          <h1>{post.contentSum}</h1>
+          <h1 className="content">{post.contentSum}</h1>
           <br />
-          <h1>{post.date}</h1>
+          <p className="date">{post.date}</p>
           <br />
           <h1>{post.category}</h1>
           <h1>{post.id}</h1>
@@ -61,7 +61,21 @@ const Post = styled.div`
   }
   .title {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
+    margin: 0.5rem 0 1rem;
+  }
+  .content {
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: normal;
+    height: 100px;
+    text-align: left;
+    font-size: 1rem;
+    word-wrap: break-word;
+  }
+  .date {
+    margin-top: 60px;
+    font-weight: 400;
   }
   .icon {
     font-size: 30px;

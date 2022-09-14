@@ -70,7 +70,7 @@ const Navbar = styled.nav`
     left: 50%;
     cursor: pointer;
     vertical-align: middle;
-    margin-left: 40%;
+    margin-left: 32%;
   }
   .logo-img {
     vertical-align: middle;
@@ -81,6 +81,10 @@ const Navbar = styled.nav`
     align-items: center;
     justify-content: flex-end;
     background-color: #eae7de;
+    justify-content: flex-end;
+    @media screen and (max-width: 1080px) {
+      display: none;
+    }
   }
 
   .nav-search {

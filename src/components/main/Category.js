@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
-import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import instance from '../../shared/api';
+import { api } from '../../shared/api';
 
 import CategoryList from './CategoryList';
 
@@ -14,7 +13,7 @@ function Category({ post }) {
   const category = params.category;
   const [categoryList, setCategoryList] = useState({});
   const getCatogories = async () => {
-    const { data } = await instance.get(`/news/category/${category}`);
+    const { data } = await api.get(`/news/category/${category}`);
 
     setCategoryList({ ...data });
   };
@@ -29,13 +28,15 @@ function Category({ post }) {
     <div style={{ backgroundColor: '#eae7de' }}>
       <Header />
       <CategoryList />
-
-      <Gridposts>
-        {categoryList.data?.map((post) => {
-          return <MainPost post={post} id={post.id} />;
-        })}
+      <Section>
+        <header className="category-head">{category}</header>
+        <div className="category-list">
+          {categoryList.data?.map((post) => {
+            return <MainPost post={post} id={post.id} />;
+          })}
+        </div>
         <div></div>
-      </Gridposts>
+      </Section>
     </div>
   );
 }
@@ -73,5 +74,28 @@ const Post = styled.div`
   .title {
     font-size: 18px;
     font-weight: 700;
+  }
+`;
+const Section = styled.section`
+  width: 90%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 5%;
+  position: relative;
+
+  .category-head {
+    margin: 4.1666rem 0 2rem;
+    font-size: 30px;
+  }
+  .category-list {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+    border-color: #051619;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
   }
 `;
