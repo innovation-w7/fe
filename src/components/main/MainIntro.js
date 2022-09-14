@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import dochi from '../../static/hiDochi.png';
-import { api } from '../../shared/api';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { __yesSubcribe } from '../../redux/modules/postSlice';
 
 function MainIntro() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [subscribe, setSubscribe] = useState();
 
@@ -18,18 +15,10 @@ function MainIntro() {
     setSubscribe({ ...subscribe, [name]: value });
   };
 
-  console.log(subscribe, '섭스크라이브 내용');
-
   const subscribePost = () => {
     dispatch(__yesSubcribe(subscribe));
-
-    // try {
-    //   const { data } = await api.post('/main/subscribe', subscribe);
-    //   console.log(data, '섭스크랍 성공?');
-    // } catch (error) {
-    //   alert(error.response.data.error.message);
-    // }
   };
+
   return (
     <div>
       <header style={{ backgroundColor: '#eae7de', position: 'relative' }}>

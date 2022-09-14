@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { __getPostsThunk } from '../../redux/modules/postSlice';
@@ -11,7 +11,6 @@ function MainPosts() {
   const { posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
-  console.log(posts.data);
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(__getPostsThunk());

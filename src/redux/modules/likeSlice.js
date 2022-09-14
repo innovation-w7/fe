@@ -40,7 +40,7 @@ export const likeSlice = createSlice({
     [__toggleLike.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-      alert('로그인을 해주세요!');
+      console.log(state.error, '좋아요 에러');
     },
   },
 });

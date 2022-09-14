@@ -36,7 +36,7 @@ function Header() {
                 <>
                   <span>
                     <Link className="emoji" to="/login">
-                      🧑‍🦲
+                      👤
                     </Link>
                   </span>
                 </>

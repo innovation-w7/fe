@@ -18,8 +18,6 @@ function Category() {
     setCategoryList({ ...data });
   };
 
-  console.log(categoryList);
-
   useEffect(() => {
     getCatogories();
   }, [category]);

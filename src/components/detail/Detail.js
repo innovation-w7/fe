@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Header from '../main/Header';
 import { api } from '../../shared/api';
 import { __toggleLike } from '../../redux/modules/likeSlice';
+import { __mailSubcribe } from '../../redux/modules/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../main/Footer';
 import Loading from '../../pages/Loading';
@@ -11,28 +12,28 @@ import Bottonbar from '../main/Bottonbar';
 
 function Detail() {
   const params = useParams();
+  const dispatch = useDispatch();
+
   const { id } = params;
   const [detail, setDetail] = useState([]);
-  const accessToken = localStorage.getItem('access-token');
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
   const [heart_count, setHeart_count] = useState(0);
+  const [subscribe, setSubscribe] = useState();
+
+  const accessToken = localStorage.getItem('access-token');
+
   const { likes } = useSelector((state) => state.likes);
 
-  console.log(likes, 'likes');
   const detailGet = async () => {
-    setLoading(true);
     try {
       const { data } = await api.get(`/news/${id}`);
       setDetail(data.data);
       setHeart_count(data.data.likeCnt);
-      setLoading(false);
     } catch (error) {
       window.alert(error);
     }
   };
 
-  const likethis = async () => {
+  const likeButtonHandler = async () => {
     dispatch(__toggleLike(id));
     if (likes.data == '좋아요 취소') {
       return setHeart_count - 1;
@@ -46,9 +47,19 @@ function Detail() {
     window.scrollTo(0, 0);
   }, [likes]);
 
+  const onChangeHandler = (e) => {
+    const {
+      target: { value, name },
+    } = e;
+    setSubscribe({ ...subscribe, [name]: value });
+  };
+  console.log(subscribe);
+
+  const subscribeButton = () => {
+    dispatch(__mailSubcribe(subscribe));
+  };
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
-      {loading ? <Loading /> : null}
       <Header />
       <Posthead>
         <p>{detail.category}</p>
@@ -60,7 +71,7 @@ function Detail() {
       </Posthead>
       <Postbody>{detail.content}</Postbody>
       {accessToken !== null ? (
-        <IsLike onClick={likethis}>🧡{heart_count} 좋았슴 !!</IsLike>
+        <IsLike onClick={likeButtonHandler}>🧡{heart_count} 좋았슴 !!</IsLike>
       ) : (
         <Link to="/login">
           <IsLike>🧡{detail.likeCnt} 좋았슴</IsLike>
@@ -69,9 +80,9 @@ function Detail() {
       <SubscribeForm>
         <div className="form-content">
           <div className="form-input">
-            <input className="input"></input>
+            <input className="input" name="email" onChange={onChangeHandler}></input>
           </div>
-          <button type="submit" className="post-input">
+          <button type="submit" className="post-input" onClick={subscribeButton}>
             뉴스레터 구독하기
           </button>
         </div>
