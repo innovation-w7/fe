@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { __getPostsThunk } from '../../redux/modules/postSlice';
@@ -10,6 +10,8 @@ import CategoryList from './CategoryList';
 function MainPosts() {
   const { posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+  const [visible, setVisible] = useState(4);
+  console.log(posts.data, '포스트리스트');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,13 +22,20 @@ function MainPosts() {
     return <Loading />;
   }
 
+  const showMoreItems = () => {
+    setVisible((prev) => prev + 8);
+  };
+
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
       <CategoryList />
       <List>
-        {posts.data?.map((post) => {
+        {posts.data?.slice(0, visible).map((post) => {
           return <MainPost post={post} key={post.id} />;
         })}
+        <div style={{ padding: '2rem 33rem' }}>
+          <Morebtn onClick={showMoreItems}>Add more</Morebtn>
+        </div>
       </List>
     </div>
   );
@@ -46,4 +55,29 @@ const List = styled.section`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+`;
+const Morebtn = styled.button`
+  margin: 0 auto;
+  width: 20rem;
+
+  flex-wrap: wrap;
+  display: inline-block;
+  min-width: 104px;
+
+  padding: 10px 1.5rem 11px;
+  border-radius: 0;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid #051619;
+  box-sizing: border-box;
+  background: #fff;
+  color: #051619;
+  align-items: center;
+
+  &:hover {
+    background: #ff6b00;
+  }
 `;
