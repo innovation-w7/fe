@@ -1,39 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../main/Header';
 import { api } from '../../shared/api';
-import { __toggleLike } from '../../redux/modules/postSlice';
-import { useDispatch } from 'react-redux';
+import { __toggleLike } from '../../redux/modules/likeSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../main/Footer';
 import Loading from '../../pages/Loading';
+import Bottonbar from '../main/Bottonbar';
 
 function Detail() {
   const params = useParams();
   const { id } = params;
-  const [detail, setDetail] = useState({});
+  const [detail, setDetail] = useState([]);
   const accessToken = localStorage.getItem('access-token');
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [heart_count, setHeart_count] = useState(0);
+  const { likes } = useSelector((state) => state.likes);
 
+  console.log(likes, 'likes');
   const detailGet = async () => {
     setLoading(true);
     try {
       const { data } = await api.get(`/news/${id}`);
       setDetail(data.data);
+      setHeart_count(data.data.likeCnt);
       setLoading(false);
     } catch (error) {
       window.alert(error);
     }
   };
 
-  const likethis = () => {
+  const likethis = async () => {
     dispatch(__toggleLike(id));
+    if (likes.data == '좋아요 취소') {
+      return setHeart_count - 1;
+    } else {
+      return setHeart_count + 1;
+    }
   };
+
   useEffect(() => {
     detailGet();
     window.scrollTo(0, 0);
-  }, [dispatch]);
+  }, [likes]);
 
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
@@ -48,7 +59,13 @@ function Detail() {
         <p>{detail.date}</p>
       </Posthead>
       <Postbody>{detail.content}</Postbody>
-      {accessToken !== null ? <IsLike onClick={likethis}>🧡{detail.likeCnt} 좋았슴 </IsLike> : <button>취소하기</button>}
+      {accessToken !== null ? (
+        <IsLike onClick={likethis}>🧡{heart_count} 좋았슴 !!</IsLike>
+      ) : (
+        <Link to="/login">
+          <IsLike>🧡{detail.likeCnt} 좋았슴</IsLike>
+        </Link>
+      )}
       <SubscribeForm>
         <div className="form-content">
           <div className="form-input">
@@ -61,6 +78,7 @@ function Detail() {
         <SubText>구독할 경우 개인정보 수집·이용과 광고성 정보 수신에 동의하게 됩니다.</SubText>
       </SubscribeForm>
       <Footer />
+      <Bottonbar />
     </div>
   );
 }

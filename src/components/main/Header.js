@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 function Header() {
   const [visible, setVisible] = useState(false);
 
+  const accessToken = localStorage.getItem('access-token');
+
   return (
     <div>
       <Navbar>
         <div className="navbar-inner">
-          <Link to={`/`} className="logo">
+          <Link to="/" className="logo">
             <img className="logo-img" src={logo} alt="뉴닉!" />
           </Link>
           <div className="nav-container">
@@ -26,16 +28,34 @@ function Header() {
                 setVisible(!visible);
               }}
             >
-              <span className="emoji">🦔</span>
+              {accessToken != null ? (
+                <>
+                  <span className="emoji">🦔</span>
+                </>
+              ) : (
+                <>
+                  <span>
+                    <Link className="emoji" to="/login">
+                      🧑‍🦲
+                    </Link>
+                  </span>
+                </>
+              )}
             </button>
           </div>
         </div>
-        {visible ? (
-          <div className="mybutton-toggle" id="toggleContent">
-            <p className="toggle-content">마이페이지</p>
-            <p className="toggle-content">프로필설정</p>
-            <p className="toggle-content">로그아웃</p>
-          </div>
+        {accessToken != null ? (
+          visible ? (
+            <div className="mybutton-toggle" id="toggleContent">
+              <Link to="/profile" className="toggle-content">
+                마이페이지
+              </Link>
+              <p className="toggle-content">프로필설정</p>
+              <p className="toggle-content">로그아웃</p>
+            </div>
+          ) : (
+            <></>
+          )
         ) : (
           <></>
         )}

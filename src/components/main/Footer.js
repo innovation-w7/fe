@@ -8,13 +8,14 @@ import Marquee from 'react-fast-marquee';
 function Footer() {
   return (
     <div>
-      <Link to={'/'}>
+      <Link to="/">
         <FooterBanner>
           <img className="wait" src={waitDochi} alt="기다리는도치"></img>
           {/* <img className="sparkle" src={sparkleDochi} alt="스파클도치"></img> */}
           <div className="home-banner-text">구독하러 가기</div>
         </FooterBanner>
       </Link>
+
       <Marquee pauseOnHover={true} gradient={false} speed={50}>
         <Footerbar>
           <div class="marquee-inner">

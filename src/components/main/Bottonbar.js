@@ -1,21 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 function Bottonbar() {
+  const accessToken = localStorage.getItem('access-token');
   return (
     <div>
       <BottonNav>
-        <p>
+        <Link to="/">
           <span className="emoji">🏠</span>
           <span>&nbsp;&nbsp;&nbsp;홈</span>
-        </p>
+        </Link>
         <p>
           <span className="emoji">🔍</span>
           <span>검색</span>
         </p>
-        <p>
-          <span className="emoji">🙍</span>
-          <span>마이페이지</span>
-        </p>
+        {accessToken != null ? (
+          <Link to="/profile">
+            <span className="emoji">🙍</span>
+            <span>마이페이지</span>
+          </Link>
+        ) : (
+          <Link to="/login">
+            <span className="emoji">🙍</span>
+            <span>로그인</span>
+          </Link>
+        )}
       </BottonNav>
     </div>
   );

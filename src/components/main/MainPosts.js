@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { __getPostsThunk } from '../../redux/modules/postSlice';
@@ -11,9 +11,10 @@ function MainPosts() {
   const { posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
+  console.log(posts.data);
   useEffect(() => {
-    dispatch(__getPostsThunk());
     window.scrollTo(0, 0);
+    dispatch(__getPostsThunk());
   }, [dispatch]);
 
   if (isLoading) {
@@ -25,7 +26,7 @@ function MainPosts() {
       <CategoryList />
       <List>
         {posts.data?.map((post) => {
-          return <MainPost post={post} id={post.id} />;
+          return <MainPost post={post} key={post.id} />;
         })}
       </List>
     </div>

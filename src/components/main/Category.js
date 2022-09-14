@@ -8,7 +8,7 @@ import CategoryList from './CategoryList';
 
 import MainPost from './MainPost';
 
-function Category({ post }) {
+function Category() {
   const params = useParams();
   const category = params.category;
   const [categoryList, setCategoryList] = useState({});
@@ -32,7 +32,7 @@ function Category({ post }) {
         <header className="category-head">{category}</header>
         <div className="category-list">
           {categoryList.data?.map((post) => {
-            return <MainPost post={post} id={post.id} />;
+            return <MainPost post={post} key={post.id} />;
           })}
         </div>
         <div></div>

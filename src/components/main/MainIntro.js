@@ -4,7 +4,7 @@ import dochi from '../../static/hiDochi.png';
 import { api } from '../../shared/api';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import __yesSubcribe from '../../redux/modules/postSlice';
+import { __yesSubcribe } from '../../redux/modules/postSlice';
 
 function MainIntro() {
   const navigate = useNavigate();

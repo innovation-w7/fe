@@ -16,7 +16,7 @@ function MyLike() {
     setMyLikeList({ ...data });
   };
 
-  console.log(myLikeList);
+  console.log(myLikeList, '내가 좋아하는 글 리스트');
 
   useEffect(() => {
     getMyLike();
@@ -24,11 +24,9 @@ function MyLike() {
 
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
-      <Header />
-
       <Gridposts>
         {myLikeList.data?.map((post) => {
-          return <MainPost post={post} id={post.id} />;
+          return <MainPost post={post} key={post.id} />;
         })}
         <div></div>
       </Gridposts>
