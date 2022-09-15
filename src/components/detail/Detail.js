@@ -21,6 +21,8 @@ function Detail() {
 
   const accessToken = localStorage.getItem('access-token');
 
+  console.log(accessToken, '디테일 페이지 토큰');
+
   const { likes } = useSelector((state) => state.likes);
 
   const detailGet = async () => {
@@ -32,9 +34,11 @@ function Detail() {
       window.alert(error);
     }
   };
+  console.log(likes);
 
+  const payload = [id, accessToken];
   const likeButtonHandler = async () => {
-    dispatch(__toggleLike(id));
+    dispatch(__toggleLike(payload));
     if (likes.data == '좋아요 취소') {
       return setHeart_count - 1;
     } else {
@@ -53,7 +57,6 @@ function Detail() {
     } = e;
     setSubscribe({ ...subscribe, [name]: value });
   };
-  console.log(subscribe);
 
   const subscribeButton = () => {
     dispatch(__mailSubcribe(subscribe));

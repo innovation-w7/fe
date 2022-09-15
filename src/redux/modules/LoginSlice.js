@@ -9,6 +9,7 @@ export const __login = createAsyncThunk('log/LOGIN_LOG', async (payload, thunkAP
   // 토큰 localstorge 저장하기
   localStorage.setItem('authorization', response.headers.authorization);
   localStorage.setItem('refresh-token', response.headers['refresh-token']);
+  localStorage.setItem('access-token', response.headers['access-token']);
   console.log(response);
   return response.data;
 });

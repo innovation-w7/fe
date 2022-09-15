@@ -33,10 +33,10 @@ function MainPosts() {
         {posts.data?.slice(0, visible).map((post) => {
           return <MainPost post={post} key={post.id} />;
         })}
-        <div style={{ padding: '2rem 33rem' }}>
-          <Morebtn onClick={showMoreItems}>Add more</Morebtn>
-        </div>
       </List>
+      <div style={{ padding: '2rem 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Morebtn onClick={showMoreItems}>더보기</Morebtn>
+      </div>
     </div>
   );
 }
@@ -55,15 +55,14 @@ const List = styled.section`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 `;
 const Morebtn = styled.button`
+  position: relative;
   margin: 0 auto;
   width: 20rem;
-
   flex-wrap: wrap;
-  display: inline-block;
   min-width: 104px;
-
   padding: 10px 1.5rem 11px;
   border-radius: 0;
   text-align: center;
@@ -76,6 +75,7 @@ const Morebtn = styled.button`
   background: #fff;
   color: #051619;
   align-items: center;
+  justify-content: center;
 
   &:hover {
     background: #ff6b00;

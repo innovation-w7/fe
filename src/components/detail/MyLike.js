@@ -7,13 +7,14 @@ import MainPost from '../main/MainPost';
 function MyLike() {
   const [myLikeList, setMyLikeList] = useState({});
   const accessToken = localStorage.getItem('access-token');
+  console.log(accessToken);
   const headers = {
     'Content-Type': 'application/json',
     'access-token': accessToken,
   };
   const getMyLike = async () => {
     const { data } = await api.get('/auth/mypage/like', { headers: headers });
-    setMyLikeList({ ...data });
+    setMyLikeList(data);
   };
 
   console.log(myLikeList, '내가 좋아하는 글 리스트');
@@ -24,48 +25,40 @@ function MyLike() {
 
   return (
     <div style={{ backgroundColor: '#eae7de' }}>
-      <Gridposts>
-        {myLikeList.data?.map((post) => {
-          return <MainPost post={post} key={post.id} />;
-        })}
+      <Section>
+        <div className="category-list">
+          {myLikeList.data?.map((post) => {
+            return <MainPost post={post} key={post.id} />;
+          })}
+        </div>
         <div></div>
-      </Gridposts>
+      </Section>
     </div>
   );
 }
 
 export default MyLike;
 
-const Gridposts = styled.div`
+const Section = styled.section`
   width: 90%;
-  max-width: 1450px;
-  min-height: 800px;
+  max-width: 1360px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0px 16%;
+  padding: 0px 5%;
   position: relative;
-  background-color: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-`;
-const Post = styled.div`
-  background-color: #eae7de;
-  display: flex;
-  flex-direction: column;
-  height: 340px;
-  width: 305px;
-  border-radius: 4px;
-  padding: 1rem;
-  border: 1px solid black;
-  border-top: none;
 
-  &:hover {
-    background-color: white;
-    cursor: pointer;
+  .category-head {
+    margin: 4.1666rem 0 2rem;
+    font-size: 30px;
   }
-  .title {
-    font-size: 18px;
-    font-weight: 700;
+  .category-list {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+    border-color: #051619;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
   }
 `;

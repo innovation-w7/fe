@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
 import { api } from '../../shared/api';
+
+//const accessToken = localStorage.getItem('access-token');
 
 const initialState = {
   posts: [],
@@ -8,9 +9,11 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
 };
-const accessToken = localStorage.getItem('access-token');
 
-export const __toggleLike = createAsyncThunk('ADD_LIKE', async (newsId, thunkAPI) => {
+export const __toggleLike = createAsyncThunk('ADD_LIKE', async (payload, thunkAPI) => {
+  const newsId = payload[0];
+  const accessToken = payload[1];
+
   try {
     const headers = {
       'Content-Type': 'application/json',
