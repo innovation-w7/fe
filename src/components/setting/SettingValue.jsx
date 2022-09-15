@@ -2,10 +2,9 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import api from "../../shared/api";
 
-const SettingValue = ({ title, data, request }) => {
+const SettingValue = ({ title, data, request, onChange }) => {
   const [toggle, setToggle] = useState(true);
-  const inputRef = useRef(null);
-
+  const [value, setValue] = useState(data);
   const handleToggle = (e) => {
     if (toggle) {
       setToggle((cur) => !cur);
@@ -15,13 +14,16 @@ const SettingValue = ({ title, data, request }) => {
   const patchData = async (e) => {
     e.preventDefault();
     const requestData = {};
-    requestData[request] = inputRef.current.value;
+    requestData[request] = data;
     await api.patch("/auth/mypage/profile", requestData).then((res) => {
       if (res.data.success) {
+        console.log(res);
         setToggle(true);
+        onChange(value);
       }
     });
   };
+
   return (
     <DivRow onClick={handleToggle} style={{ cursor: "pointer" }}>
       <h2 className="setting-row-label">{title}</h2>
@@ -35,7 +37,8 @@ const SettingValue = ({ title, data, request }) => {
                 name="name"
                 className="textfield-input"
                 placeholder={title}
-                ref={inputRef}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
               />
             </div>
             <Footer>

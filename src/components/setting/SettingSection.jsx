@@ -11,6 +11,7 @@ import SettingValue from "./SettingValue";
 
 const SettingSection = () => {
   const [profile, setProfile] = useState({});
+  const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
   const [subscribeToggle, setSubscribeToggle] = useState();
 
@@ -20,8 +21,7 @@ const SettingSection = () => {
         .get("/auth/mypage/profile")
         .then((res) => {
           if (res.data.success) {
-            console.log(res.data);
-            setProfile(res.data.data);
+            setNickname(res.data.data.nickname);
             setSubscribeToggle(res.data.data.isSubscribe);
           }
         })
@@ -35,23 +35,24 @@ const SettingSection = () => {
 
   return (
     <Section>
-      <SettingHeader nickname={profile?.nickname} />
+      <SettingHeader nickname={nickname} />
       <div className="setting-body">
         <h2>뉴니커 정보</h2>
       </div>
-      <SettingValue title="닉네임" data={profile.nickname} request="nickname" />
+      <SettingValue
+        title="닉네임"
+        data={nickname}
+        onChange={(value) => setNickname(value)}
+        request="nickname"
+      />
       <SettingValue
         title="출생년도"
-        data="고슴이는 두살인데 준형홍 뉴니커는 몇 살이슴"
+        data={`고슴이는 두살인데 ${nickname} 뉴니커는 몇 살이슴`}
       />
       <SettingValue title="성별" data="고슴이는 성별을 밝히고 싶지 않슴!" />
       <DivRow style={{ cursor: "default" }}>
         <h2 className="setting-row-label">배송지</h2>
-        <DivValue>
-          <p className="setting-row-value-username"></p>
-          <p className="setting-row-value-address"></p>
-          <p className="setting-row-value-phone"></p>
-        </DivValue>
+        <DivValue>{nickname}</DivValue>
       </DivRow>
 
       <small style={{ display: "block", margin: "2rem 0px 0.5rem" }}>
@@ -78,21 +79,23 @@ const SettingSection = () => {
       <SettingValue title="관심분야" data={"고슴이는 밀웜에 관심있슴!"} />
 
       <div className="setting-body">
-        <h2 className="setting-body-heading">비밀번호 변경</h2>
-        <SettingPassword title={"비밀번호"} />
+        <h2>비밀번호 변경</h2>
       </div>
 
+      <SettingPassword title={"비밀번호"} />
+
       <div className="setting-body">
-        <h2 className="setting-body-heading">이메일 수신여부</h2>
-        <DivRow style={{ cursor: "default" }}>
-          <h2 className="setting-row-label">이메일</h2>
-          <DivValue>jshwa0429@gmail.com</DivValue>
-        </DivRow>
-        <SettingSubscribe
-          isSubscribe={subscribeToggle}
-          onChange={() => setSubscribeToggle((cur) => !cur)}
-        />
+        <h2>이메일 수신여부</h2>
       </div>
+      <DivRow style={{ cursor: "default" }}>
+        <h2 className="setting-row-label">이메일</h2>
+        <DivValue></DivValue>
+      </DivRow>
+      <SettingSubscribe
+        isSubscribe={subscribeToggle}
+        onChange={() => setSubscribeToggle((cur) => !cur)}
+      />
+
       <SettingFooter />
     </Section>
   );

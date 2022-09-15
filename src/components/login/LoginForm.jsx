@@ -56,14 +56,13 @@ const LoginForm = () => {
         .then((res) => {
           if (res.data.success) {
             localStorage.setItem("access-token", res.headers["access-token"]);
-            console.log(localStorage.getItem("access-token"));
+
             navigate("/");
           } else {
             alert("로그인에 실패하였습니다.");
           }
         })
         .catch((err) => {
-          console.log(err);
           setMessage("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
         });
     }
@@ -73,6 +72,7 @@ const LoginForm = () => {
     <Form name="login" onSubmit={handleSubmit}>
       <Header />
       <Google />
+
       <div className="login-divider" />
       <TextField
         type="text"

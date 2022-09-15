@@ -20,8 +20,6 @@ const SettingPassword = ({ data, title, request }) => {
     const password = passwordRef.current.value;
     const passwordConfirm = passwordConfirmRef.current.value;
 
-    console.log(password, passwordConfirm);
-
     let pwAlert = "";
     let pwConfirmAlert = "";
     if (password !== passwordConfirm) {
@@ -48,19 +46,16 @@ const SettingPassword = ({ data, title, request }) => {
     setPasswordAlert(pwAlert);
     setPasswordConfirmAlert(pwConfirmAlert);
 
-    console.log(pwAlert, pwConfirmAlert);
     return !pwAlert && !pwConfirmAlert;
   };
 
   const patchData = async (e) => {
     e.preventDefault();
     if (checkValidation()) {
-      console.log("하하");
       const requestData = {};
       requestData["password"] = passwordRef.current.value;
       await api.patch("/auth/mypage/profile", requestData).then((res) => {
         if (res.data.success) {
-          console.log(res.data);
           setToggle(true);
         }
       });
@@ -145,6 +140,9 @@ const DivRow = styled.div`
 `;
 
 const DivValue = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   form {
     display: block;
     margin-top: 0em;
