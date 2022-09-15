@@ -1,24 +1,24 @@
-import { Header, TextField } from "../form";
-import Google from "./Google";
-import { Link, useNavigate } from "react-router-dom";
-import LoginFooter from "./LoginFooter";
-import styled from "styled-components";
-import { useEffect, useRef } from "react";
-import { api } from "../../shared/api";
-import { useState } from "react";
+import { Header, TextField } from '../form';
+import Google from './Google';
+import { Link, useNavigate } from 'react-router-dom';
+import LoginFooter from './LoginFooter';
+import styled from 'styled-components';
+import { useEffect, useRef } from 'react';
+import { api } from '../../shared/api';
+import { useState } from 'react';
 
 const LoginForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [message, setMessage] = useState(false);
-  const [emailAlert, setEmailAlert] = useState("");
-  const [passwordAlert, setPasswordAlert] = useState("");
+  const [emailAlert, setEmailAlert] = useState('');
+  const [passwordAlert, setPasswordAlert] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("access-token");
+    const accessToken = localStorage.getItem('access-token');
     if (accessToken) {
-      navigate("/");
+      navigate('/');
     }
   }, [navigate]);
 
@@ -32,19 +32,18 @@ const LoginForm = () => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    const emailReg =
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    const emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
     if (!email) {
-      setEmailAlert("이메일 주소를 입력해주세요.");
+      setEmailAlert('이메일 주소를 입력해주세요.');
     } else if (!emailReg.test(email)) {
-      setEmailAlert("이메일 형식을 지켜주세요.");
+      setEmailAlert('이메일 형식을 지켜주세요.');
     }
 
     if (!password) {
-      setPasswordAlert("비밀번호를 입력해주세요.");
+      setPasswordAlert('비밀번호를 입력해주세요.');
     } else if (password.length < 8) {
-      setPasswordAlert("비밀번호는 8글자 이상 입니다.");
+      setPasswordAlert('비밀번호는 8글자 이상 입니다.');
     }
 
     if (!emailAlert || !passwordAlert) {
@@ -55,11 +54,12 @@ const LoginForm = () => {
         })
         .then((res) => {
           if (res.data.success) {
-            localStorage.setItem("access-token", res.headers["access-token"]);
 
+            localStorage.setItem("access-token", res.headers["access-token"]);
+            localStorage.setItem('nickname', res.data.data.nickname);
             navigate("/");
           } else {
-            alert("로그인에 실패하였습니다.");
+            alert('로그인에 실패하였습니다.');
           }
         })
         .catch(() => {
@@ -74,14 +74,7 @@ const LoginForm = () => {
       <Google />
 
       <div className="login-divider" />
-      <TextField
-        type="text"
-        name="email"
-        placeholder="이메일"
-        ref={emailRef}
-        small={emailAlert}
-      />
-
+      <TextField type="text" name="email" placeholder="이메일" ref={emailRef} small={emailAlert} />
       <TextField
         type="password"
         name="password"

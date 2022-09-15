@@ -6,18 +6,20 @@ import { Link } from "react-router-dom";
 function Header() {
   const [visible, setVisible] = useState(false);
 
+  const accessToken = localStorage.getItem('access-token');
+
   return (
     <div>
       <Navbar>
         <div className="navbar-inner">
-          <Link to={`/`} className="logo">
+          <Link to="/" className="logo">
             <img className="logo-img" src={logo} alt="뉴닉!" />
           </Link>
           <div className="nav-container">
             <div className="nav-search">
-              <button className="search-button">
-                <b>찾기</b>
-              </button>
+              <Link to="/search">
+                <button className="search-button">🔎</button>
+              </Link>
             </div>
             <button
               type="checkbox"
@@ -26,23 +28,37 @@ function Header() {
                 setVisible(!visible);
               }}
             >
-              <span className="emoji">🦔</span>
+              {accessToken != null ? (
+                <>
+                  <span className="emoji">🦔</span>
+                </>
+              ) : (
+                <>
+                  <span>
+                    <Link className="emoji" to="/login">
+                      👤
+                    </Link>
+                  </span>
+                </>
+              )}
             </button>
           </div>
         </div>
-        {visible ? (
-          <div className="mybutton-toggle" id="toggleContent">
-            <p className="toggle-content">마이페이지</p>
-            <p className="toggle-content">프로필설정</p>
-            <p
-              className="toggle-content"
-              onClick={() => {
+
+        {accessToken != null ? (
+          visible ? (
+            <div className="mybutton-toggle" id="toggleContent">
+              <Link to="/profile" className="toggle-content">
+                마이페이지
+              </Link>
+              <p className="toggle-content">프로필설정</p>
+              <p className="toggle-content" onClick={() => {
                 localStorage.removeItem("access-token");
-              }}
-            >
-              로그아웃
-            </p>
-          </div>
+              }}>로그아웃</p>
+            </div>
+          ) : (
+            <></>
+          )
         ) : (
           <></>
         )}
@@ -77,17 +93,23 @@ const Navbar = styled.nav`
     left: 50%;
     cursor: pointer;
     vertical-align: middle;
-    margin-left: 40%;
+    margin-left: 32%;
   }
   .logo-img {
     vertical-align: middle;
     width: 100%;
+    margin-left: 70px;
   }
   .nav-container {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     background-color: #eae7de;
+    justify-content: flex-end;
+
+    @media screen and (max-width: 1080px) {
+      display: none;
+    }
   }
 
   .nav-search {
@@ -111,7 +133,7 @@ const Navbar = styled.nav`
     overflow: hidden;
     border-radius: 0;
     border: 1px solid #051619;
-    border-left: 1px #051619;
+    border-left: none;
     background-color: #eae7de;
     font-size: 2rem;
     position: relative;

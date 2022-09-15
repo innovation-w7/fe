@@ -1,37 +1,33 @@
-
 import React, { useEffect, useState } from 'react';
-import Header from './Header';
-import { useParams, Link } from 'react-router-dom';
+import Header from '../main/Header';
 import styled from 'styled-components';
 import { api } from '../../shared/api';
 
-
-import CategoryList from "./CategoryList";
-
-import MainPost from "./MainPost";
-
-function Category() {
-  const params = useParams();
-  const category = params.category;
-  const [categoryList, setCategoryList] = useState({});
-  const getCatogories = async () => {
-    const { data } = await api.get(`/news/category/${category}`);
-
-    setCategoryList({ ...data });
+import MainPost from '../main/MainPost';
+function MyLike() {
+  const [myLikeList, setMyLikeList] = useState({});
+  const accessToken = localStorage.getItem('access-token');
+  console.log(accessToken);
+  const headers = {
+    'Content-Type': 'application/json',
+    'access-token': accessToken,
+  };
+  const getMyLike = async () => {
+    const { data } = await api.get('/auth/mypage/like', { headers: headers });
+    setMyLikeList(data);
   };
 
+  console.log(myLikeList, '내가 좋아하는 글 리스트');
+
   useEffect(() => {
-    getCatogories();
-  }, [category]);
+    getMyLike();
+  }, []);
 
   return (
-    <div style={{ backgroundColor: "#eae7de" }}>
-      <Header />
-      <CategoryList />
+    <div style={{ backgroundColor: '#eae7de' }}>
       <Section>
-        <header className="category-head">{category}</header>
         <div className="category-list">
-          {categoryList.data?.map((post) => {
+          {myLikeList.data?.map((post) => {
             return <MainPost post={post} key={post.id} />;
           })}
         </div>
@@ -41,10 +37,10 @@ function Category() {
   );
 }
 
-export default Category;
+export default MyLike;
 
 const Section = styled.section`
-  width: 90%;
+  width: 89%;
   max-width: 1360px;
   margin-left: auto;
   margin-right: auto;
@@ -61,6 +57,7 @@ const Section = styled.section`
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     position: relative;
+    width: 99%;
     border-color: #051619;
     border-style: solid;
     border-width: 1px 0 0 1px;
