@@ -10,9 +10,8 @@ import SettingSubscribe from "./SettingSubscribe";
 import SettingValue from "./SettingValue";
 
 const SettingSection = () => {
-  const [profile, setProfile] = useState({});
-  const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
+  const [nickname, setNickname] = useState("");
   const [subscribeToggle, setSubscribeToggle] = useState();
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const SettingSection = () => {
       navigate("/");
     }
     getData();
-  }, []);
+  }, [navigate]);
 
   return (
     <Section>
