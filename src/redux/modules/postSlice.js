@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import instance from '../../shared/api';
+import api from "../../shared/api";
 
 const initialState = {
   posts: [],
@@ -9,17 +9,20 @@ const initialState = {
   isSuccess: false,
 };
 
-export const __getPostsThunk = createAsyncThunk('GET_POSTS', async (payload, thunkAPI) => {
-  try {
-    const { data } = await instance.get('/news');
-    return thunkAPI.fulfillWithValue(data);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+export const __getPostsThunk = createAsyncThunk(
+  "GET_POSTS",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await api.get("/news");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);
 
 export const postSlice = createSlice({
-  name: 'posts',
+  name: "posts",
   initialState,
   reducers: {},
   extraReducers: {

@@ -16,9 +16,11 @@ export const api = axios.create({
 // 	return config;
 // });
 
+export default api;
+
 // 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
 api.interceptors.request.use(function (config) {
   const accessToken = localStorage.getItem("access-token");
-  config.headers.common["authorization"] = `${accessToken}`;
+  config.headers.common["access-token"] = `${accessToken}`;
   return config;
 });

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import Header from '../main/Header';
-import instance from '../../shared/api';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import Header from "../main/Header";
+import api from "../../shared/api";
 
 function Detail() {
   const params = useParams();
@@ -10,7 +10,7 @@ function Detail() {
   const [detail, setDetail] = useState({});
 
   const detailGet = async () => {
-    const { data } = await instance.get(`/news/${id}`);
+    const { data } = await api.get(`/news/${id}`);
     setDetail(data.data);
   };
   useEffect(() => {
@@ -18,7 +18,7 @@ function Detail() {
   }, [id]);
 
   return (
-    <div style={{ backgroundColor: '#eae7de' }}>
+    <div style={{ backgroundColor: "#eae7de" }}>
       <Header />
       <Posthead>
         <p>{detail.category}</p>

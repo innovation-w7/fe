@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import Header from './Header';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import styled from 'styled-components';
-import instance from '../../shared/api';
+import React, { useEffect, useState } from "react";
+import Header from "./Header";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import styled from "styled-components";
+import api from "../../shared/api";
 
-import CategoryList from './CategoryList';
+import CategoryList from "./CategoryList";
 
-import MainPost from './MainPost';
+import MainPost from "./MainPost";
 
 function Category({ post }) {
   const params = useParams();
   const category = params.category;
   const [categoryList, setCategoryList] = useState({});
   const getCatogories = async () => {
-    const { data } = await instance.get(`/news/category/${category}`);
+    const { data } = await api.get(`/news/category/${category}`);
 
     setCategoryList({ ...data });
   };
@@ -26,7 +26,7 @@ function Category({ post }) {
   }, [category]);
 
   return (
-    <div style={{ backgroundColor: '#eae7de' }}>
+    <div style={{ backgroundColor: "#eae7de" }}>
       <Header />
       <CategoryList />
 
