@@ -1,9 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // axios 기본 세팅
-import { api } from "../../shared/api";
+import { api } from '../../shared/api';
 
 // 로그인
+
 export const __login = createAsyncThunk(
   "log/LOGIN_LOG",
   async (payload, thunkAPI) => {
@@ -11,15 +12,17 @@ export const __login = createAsyncThunk(
     // 토큰 localstorge 저장하기
     localStorage.setItem("authorization", response.headers.authorization);
     localStorage.setItem("refresh-token", response.headers["refresh-token"]);
+     localStorage.setItem('access-token', response.headers['access-token']);
     return response.data;
   }
 );
 
+
 // slice
 const loginSlice = createSlice({
-  name: "login",
+  name: 'login',
   initialState: {
-    user: { nickName: "", result: false },
+    user: { nickName: '', result: false },
     loading: false,
     error: null,
   },

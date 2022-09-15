@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -28,7 +28,10 @@ const GlobalStyle = createGlobalStyle`
     font-feature-settings: normal;
     font-variation-settings: normal;
     text-rendering: optimizeLegibility;
-    
+    overflow-y:hidden;
+    overflow: scroll;
+    min-width: 320px;
+
   }
 
   body {

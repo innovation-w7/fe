@@ -1,8 +1,11 @@
+
 import styled from "styled-components";
+
 
 const Google = () => {
   return (
     <LoginSocial>
+
       <button
         type="button"
         className="google-button secondary-button"
