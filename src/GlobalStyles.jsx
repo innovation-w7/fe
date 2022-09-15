@@ -31,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-y:hidden;
     overflow: scroll;
     min-width: 320px;
+
   }
 
   body {

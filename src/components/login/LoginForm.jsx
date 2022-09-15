@@ -22,6 +22,12 @@ const LoginForm = () => {
     }
   }, [navigate]);
 
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
@@ -42,23 +48,22 @@ const LoginForm = () => {
 
     if (!emailAlert || !passwordAlert) {
       await api
-        .post('/user/login', {
+        .post("/user/login", {
           email: email,
           password: password,
         })
         .then((res) => {
           if (res.data.success) {
-            localStorage.setItem('access-token', res.headers['access-token']);
-            console.log(localStorage.getItem('access-token'));
-            localStorage.setItem('nickname', res.data.data.nickname); //지워야될부분
-            navigate('/');
+
+            localStorage.setItem("access-token", res.headers["access-token"]);
+            localStorage.setItem('nickname', res.data.data.nickname);
+            navigate("/");
           } else {
             alert('로그인에 실패하였습니다.');
           }
         })
         .catch((err) => {
-          console.log(err);
-          setMessage('가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.');
+          setMessage("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
         });
     }
   };
@@ -67,10 +72,17 @@ const LoginForm = () => {
     <Form name="login" onSubmit={handleSubmit}>
       <Header />
       <Google />
+
       <div className="login-divider" />
       <TextField type="text" name="email" placeholder="이메일" ref={emailRef} small={emailAlert} />
-
-      <TextField type="password" name="password" placeholder="비밀번호" ref={passwordRef} small={passwordAlert} />
+      <TextField
+        type="password"
+        name="password"
+        placeholder="비밀번호"
+        ref={passwordRef}
+        small={passwordAlert}
+        onKeyPress={handleOnKeyPress}
+      />
       {message && <p>가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</p>}
       <div className="login-forgot">
         <Link to="/forgot">비밀번호를 잊으셨나요?</Link>

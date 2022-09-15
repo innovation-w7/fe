@@ -101,7 +101,6 @@ const SignUpForm = () => {
       });
       isAbleToPost = false;
     }
-    console.log(isAbleToPost);
     return isAbleToPost;
   };
 
@@ -109,7 +108,8 @@ const SignUpForm = () => {
     e.preventDefault();
     if (checkValidation()) {
       api
-        .post('/user/signup', {
+        .post("/user/signup", {
+
           email: email,
           password: password,
           passwordConfirm: passwordConfirm,
@@ -119,7 +119,7 @@ const SignUpForm = () => {
         .then((res) => {
           if (res.data.success) {
             api
-              .post('/user/login', {
+              .post("/user/login", {
                 email: email,
                 password: password,
               })
@@ -133,7 +133,7 @@ const SignUpForm = () => {
               });
           }
         })
-        .catch((err) => console.log(err));
+        .catch((res) => alert(res.response.data.error.message));
     }
   };
   return (

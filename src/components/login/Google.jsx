@@ -1,43 +1,26 @@
-import styled from 'styled-components';
-import GoogleLogin from 'react-google-login';
-import { gapi } from 'gapi-script';
-import { useEffect } from 'react';
+
+import styled from "styled-components";
+
+
 const Google = () => {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId,
-        scope: 'email',
-      });
-    }
-
-    gapi.load('client:auth2', start);
-  }, []);
-  const clientId = '893727311597-528p6s979bj28k9ru1qkg0tulrtsll0s.apps.googleusercontent.com';
-
-  const onSuccess = (res) => {
-    console.log(res);
-  };
-
-  const onFailure = (res) => {
-    console.log('err', res);
-  };
-
   return (
     <LoginSocial>
-      <GoogleLogin
-        clientId={clientId}
-        render={(props) => (
-          <button onClick={props.onClick} className="google-button secondary-button">
-            <span>
-              <img src={`${process.env.PUBLIC_URL}/images/logo-google.svg`} alt="" />
-            </span>
-            구글로 시작하기
-          </button>
-        )}
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-      />
+
+      <button
+        type="button"
+        className="google-button secondary-button"
+        onClick={() =>
+          (window.location.href = "http://54.177.177.138/api/user/login/google")
+        }
+      >
+        <span>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/logo.Google.png`}
+            alt=""
+          />
+        </span>
+        구글로 시작하기
+      </button>
     </LoginSocial>
   );
 };
@@ -90,6 +73,10 @@ const LoginSocial = styled.div`
     width: 24px;
     height: 24px;
     margin-right: 1rem;
+  }
+
+  img {
+    width: 24px;
   }
 
   button > * {

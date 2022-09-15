@@ -1,12 +1,14 @@
+
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { api } from '../../shared/api';
 
-import CategoryList from './CategoryList';
 
-import MainPost from './MainPost';
+import CategoryList from "./CategoryList";
+
+import MainPost from "./MainPost";
 
 function Category() {
   const params = useParams();
@@ -23,7 +25,7 @@ function Category() {
   }, [category]);
 
   return (
-    <div style={{ backgroundColor: '#eae7de' }}>
+    <div style={{ backgroundColor: "#eae7de" }}>
       <Header />
       <CategoryList />
       <Section>

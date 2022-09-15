@@ -1,6 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { api } from '../../shared/api';
+
+import api from "../../shared/api";
+
 
 const initialState = {
   posts: [],
@@ -10,14 +12,19 @@ const initialState = {
 };
 const accessToken = localStorage.getItem('access-token');
 
-export const __getPostsThunk = createAsyncThunk('GET_POSTS', async (payload, thunkAPI) => {
-  try {
-    const { data } = await api.get('/news');
-    return thunkAPI.fulfillWithValue(data);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+
+export const __getPostsThunk = createAsyncThunk(
+  "GET_POSTS",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await api.get("/news");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+
   }
-});
+);
 
 export const __yesSubcribe = createAsyncThunk('YES_SUBSCRIBE', async (payload, thunkAPI) => {
   try {
@@ -46,7 +53,7 @@ export const __mailSubcribe = createAsyncThunk('MAIL_SUBSCRIBE', async (payload,
   }
 });
 export const postSlice = createSlice({
-  name: 'posts',
+  name: "posts",
   initialState,
   reducers: {},
   extraReducers: {

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import logo from '../../static/newneekLogo.png';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import logo from "../../static/newneekLogo.png";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [visible, setVisible] = useState(false);
@@ -44,6 +44,7 @@ function Header() {
             </button>
           </div>
         </div>
+
         {accessToken != null ? (
           visible ? (
             <div className="mybutton-toggle" id="toggleContent">
@@ -51,7 +52,9 @@ function Header() {
                 마이페이지
               </Link>
               <p className="toggle-content">프로필설정</p>
-              <p className="toggle-content">로그아웃</p>
+              <p className="toggle-content" onClick={() => {
+                localStorage.removeItem("access-token");
+              }}>로그아웃</p>
             </div>
           ) : (
             <></>
