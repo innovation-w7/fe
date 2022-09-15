@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Footer from './Footer';
-import Bottonbar from './Bottonbar';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function SearchKeyword() {
   const [word, setWord] = useState();
@@ -15,13 +13,18 @@ function SearchKeyword() {
     setWord(value);
   };
   const navigate = useNavigate();
-  console.log(word);
+
   return (
     <div>
       <Header />
       <Search>
         <form className="textfield">
-          <input className="input" type="text" name="keyword" onChange={onChangeHandler} />
+          <input
+            className="input"
+            type="text"
+            name="keyword"
+            onChange={onChangeHandler}
+          />
           <Send type="submit" onClick={() => navigate(`/search/${word}`)}>
             검색
           </Send>
