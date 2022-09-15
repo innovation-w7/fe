@@ -46,7 +46,6 @@ const SettingPassword = ({ data, title, request }) => {
     setPasswordAlert(pwAlert);
     setPasswordConfirmAlert(pwConfirmAlert);
 
-    console.log(pwAlert, pwConfirmAlert);
     return !pwAlert && !pwConfirmAlert;
   };
 
