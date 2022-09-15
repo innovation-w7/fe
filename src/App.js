@@ -3,12 +3,20 @@ import Category from "./components/main/Category";
 import Loading from "./pages/Loading";
 import Main from "./pages/Main";
 import Detail from "./components/detail/Detail";
-import CategoryList from "./components/main/CategoryList";
-import { LoginPage, SignUpPage, ForgotPage, MyPage } from "./pages";
+import { Navigate } from "react-router-dom";
+import {
+  LoginPage,
+  SignUpPage,
+  ForgotPage,
+  MyPage,
+  SettingPage,
+  DeletePage,
+} from "./pages";
 function App() {
   return (
     <div>
       <Routes>
+        <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<Main />} />
         <Route path="/loading" element={<Loading />} />
         <Route path="/tag/:category" element={<Category />} />
@@ -16,7 +24,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/profile" element={<MyPage />} />
+        <Route path="/setting" element={<SettingPage />} />
         <Route path="/forgot" element={<ForgotPage />} />
+        <Route path="/delete" element={<DeletePage />} />
       </Routes>
     </div>
   );

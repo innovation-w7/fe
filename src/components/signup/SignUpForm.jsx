@@ -138,7 +138,7 @@ const SignUpForm = () => {
               });
           }
         })
-        .catch((err) => console.log(err));
+        .catch((res) => alert(res.response.data.error.message));
     }
   };
   return (

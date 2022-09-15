@@ -22,6 +22,12 @@ const LoginForm = () => {
     }
   }, [navigate]);
 
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
@@ -82,6 +88,7 @@ const LoginForm = () => {
         placeholder="비밀번호"
         ref={passwordRef}
         small={passwordAlert}
+        onKeyPress={handleOnKeyPress}
       />
       {message && <p>가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</p>}
       <div className="login-forgot">

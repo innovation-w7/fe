@@ -16,6 +16,7 @@ const Navbar = () => {
             alt="뉴닉 NEWNEEK"
           />
         </a>
+
         <User>
           <div style={{ marginRight: "-1px" }} role="search">
             <button
