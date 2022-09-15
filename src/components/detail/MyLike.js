@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../main/Header';
-import styled from 'styled-components';
-import { api } from '../../shared/api';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { api } from "../../shared/api";
 
-import MainPost from '../main/MainPost';
+import MainPost from "../main/MainPost";
 function MyLike() {
   const [myLikeList, setMyLikeList] = useState({});
-  const accessToken = localStorage.getItem('access-token');
-  console.log(accessToken);
+  const accessToken = localStorage.getItem("access-token");
+
   const headers = {
-    'Content-Type': 'application/json',
-    'access-token': accessToken,
+    "Content-Type": "application/json",
+    "access-token": accessToken,
   };
   const getMyLike = async () => {
-    const { data } = await api.get('/auth/mypage/like', { headers: headers });
+    const { data } = await api.get("/auth/mypage/like", { headers: headers });
     setMyLikeList(data);
   };
-
-  console.log(myLikeList, '내가 좋아하는 글 리스트');
 
   useEffect(() => {
     getMyLike();
   }, []);
 
   return (
-    <div style={{ backgroundColor: '#eae7de' }}>
+    <div style={{ backgroundColor: "#eae7de" }}>
       <Section>
         <div className="category-list">
           {myLikeList.data?.map((post) => {

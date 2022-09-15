@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { api } from '../../shared/api';
-import styled from 'styled-components';
-import MainPost from './MainPost';
-import Header from './Header';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { api } from "../../shared/api";
+import styled from "styled-components";
+import MainPost from "./MainPost";
+import Header from "./Header";
 
 function Search() {
   const params = useParams();
@@ -13,7 +13,6 @@ function Search() {
     const { data } = await api.get(`/news/search/${keyword}`);
 
     setSearchList({ ...data });
-    console.log(data);
   };
 
   useEffect(() => {

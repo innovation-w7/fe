@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { __getPostsThunk } from '../../redux/modules/postSlice';
-import MainPost from './MainPost';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { __getPostsThunk } from "../../redux/modules/postSlice";
+import MainPost from "./MainPost";
 
-import Loading from '../../pages/Loading';
-import CategoryList from './CategoryList';
+import Loading from "../../pages/Loading";
+import CategoryList from "./CategoryList";
 
 function MainPosts() {
   const { posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(8);
-  console.log(posts.data, '포스트리스트');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,14 +26,21 @@ function MainPosts() {
   };
 
   return (
-    <div style={{ backgroundColor: '#eae7de' }}>
+    <div style={{ backgroundColor: "#eae7de" }}>
       <CategoryList />
       <List>
         {posts.data?.slice(0, visible).map((post) => {
           return <MainPost post={post} key={post.id} />;
         })}
       </List>
-      <div style={{ padding: '2rem 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div
+        style={{
+          padding: "2rem 0",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Morebtn onClick={showMoreItems}>더보기</Morebtn>
       </div>
     </div>
