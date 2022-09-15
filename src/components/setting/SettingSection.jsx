@@ -21,7 +21,6 @@ const SettingSection = () => {
         .get("/auth/mypage/profile")
         .then((res) => {
           if (res.data.success) {
-            console.log(res.data);
             setNickname(res.data.data.nickname);
             setSubscribeToggle(res.data.data.isSubscribe);
           }
@@ -48,16 +47,12 @@ const SettingSection = () => {
       />
       <SettingValue
         title="출생년도"
-        data="고슴이는 두살인데 준형홍 뉴니커는 몇 살이슴"
+        data={`고슴이는 두살인데 ${nickname} 뉴니커는 몇 살이슴`}
       />
       <SettingValue title="성별" data="고슴이는 성별을 밝히고 싶지 않슴!" />
       <DivRow style={{ cursor: "default" }}>
         <h2 className="setting-row-label">배송지</h2>
-        <DivValue>
-          <p className="setting-row-value-username"></p>
-          <p className="setting-row-value-address"></p>
-          <p className="setting-row-value-phone"></p>
-        </DivValue>
+        <DivValue>{nickname}</DivValue>
       </DivRow>
 
       <small style={{ display: "block", margin: "2rem 0px 0.5rem" }}>

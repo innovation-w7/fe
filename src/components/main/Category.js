@@ -19,8 +19,6 @@ function Category({ post }) {
     setCategoryList({ ...data });
   };
 
-  console.log(categoryList);
-
   useEffect(() => {
     getCatogories();
   }, [category]);

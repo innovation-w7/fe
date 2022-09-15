@@ -56,7 +56,7 @@ const LoginForm = () => {
         .then((res) => {
           if (res.data.success) {
             localStorage.setItem("access-token", res.headers["access-token"]);
-            console.log(localStorage.getItem("access-token"));
+
             navigate("/");
           } else {
             alert("로그인에 실패하였습니다.");

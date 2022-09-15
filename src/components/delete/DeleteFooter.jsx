@@ -15,7 +15,10 @@ const DeleteFooter = () => {
         },
         withCredentials: true,
       })
-      .then(() => navigate("/"))
+      .then(() => {
+        localStorage.removeItem("access-token");
+        navigate("/");
+      })
       .catch((err) => alert("탈퇴에 실패하였습니다."));
   };
 

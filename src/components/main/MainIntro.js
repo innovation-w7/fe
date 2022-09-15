@@ -19,9 +19,8 @@ function MainIntro() {
 
   const subscribePost = async (subscribe) => {
     try {
-      const { data } = await api.post("/main/subscribe", subscribe);
+      await api.post("/main/subscribe", subscribe);
       navigate("/");
-      console.log(data);
     } catch (error) {
       alert(error.response.data.error.message);
     }
