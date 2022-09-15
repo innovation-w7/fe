@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import api from "../../shared/api";
 
@@ -17,7 +17,6 @@ const SettingValue = ({ title, data, request, onChange }) => {
     requestData[request] = data;
     await api.patch("/auth/mypage/profile", requestData).then((res) => {
       if (res.data.success) {
-        console.log(res);
         setToggle(true);
         onChange(value);
       }
