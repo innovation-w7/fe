@@ -15,8 +15,8 @@ const DeleteFooter = () => {
         },
         withCredentials: true,
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then(() => navigate("/"))
+      .catch((err) => alert("탈퇴에 실패하였습니다."));
   };
 
   const handleReturnMain = () => {

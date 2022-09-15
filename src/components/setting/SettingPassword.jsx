@@ -142,9 +142,16 @@ const DivRow = styled.div`
   :first-of-type {
     border-top: 1px solid #051619;
   }
+
+  h2 {
+    font-weight: 400px;
+  }
 `;
 
 const DivValue = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   form {
     display: block;
     margin-top: 0em;
