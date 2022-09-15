@@ -11,10 +11,10 @@ function Bottonbar() {
           <span className="emoji">🏠</span>
           <span>&nbsp;&nbsp;&nbsp;홈</span>
         </Link>
-        <p>
+        <Link to="/search">
           <span className="emoji">🔍</span>
           <span>검색</span>
-        </p>
+        </Link>
         {accessToken != null ? (
           <Link to="/profile">
             <span className="emoji">🙍</span>

@@ -130,6 +130,7 @@ const IsLike = styled.button`
   display: flex;
   border: none;
   background-color: #eae7de;
+
   &:hover {
     color: #ff6b00;
     font-weight: 800;

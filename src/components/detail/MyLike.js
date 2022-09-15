@@ -40,7 +40,7 @@ function MyLike() {
 export default MyLike;
 
 const Section = styled.section`
-  width: 90%;
+  width: 89%;
   max-width: 1360px;
   margin-left: auto;
   margin-right: auto;
@@ -57,6 +57,7 @@ const Section = styled.section`
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     position: relative;
+    width: 99%;
     border-color: #051619;
     border-style: solid;
     border-width: 1px 0 0 1px;

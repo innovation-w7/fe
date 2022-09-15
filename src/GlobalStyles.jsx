@@ -30,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeLegibility;
     overflow-y:hidden;
     overflow: scroll;
+    min-width: 320px;
   }
 
   body {

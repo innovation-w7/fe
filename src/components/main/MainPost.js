@@ -50,7 +50,6 @@ const Post = styled.div`
   flex-direction: column;
   height: 340px;
   width: 305px;
-  border-radius: 4px;
   padding: 1rem;
   border: 1px solid black;
   border-top: none;

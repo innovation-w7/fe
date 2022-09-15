@@ -24,7 +24,9 @@ export const __yesSubcribe = createAsyncThunk('YES_SUBSCRIBE', async (payload, t
     const headers = {
       'Content-Type': 'application/json',
     };
-    const data = await api.post('/main/subscribe', payload, { headers: headers });
+    console.log(payload);
+    const { data } = await api.post('/main/subscribe', payload, { headers: headers });
+    console.log(data);
     return thunkAPI.fulfillWithValue(data);
   } catch (error) {
     alert(error);
@@ -36,7 +38,7 @@ export const __mailSubcribe = createAsyncThunk('MAIL_SUBSCRIBE', async (payload,
     const headers = {
       'Content-Type': 'application/json',
     };
-    const data = await api.post('/detail/subscribe', payload, { headers: headers });
+    const { data } = await api.post('/detail/subscribe', payload, { headers: headers });
     return thunkAPI.fulfillWithValue(data);
   } catch (error) {
     alert(error);
@@ -62,7 +64,9 @@ export const postSlice = createSlice({
 
     [__yesSubcribe.fulfilled]: (state, action) => {
       state.isLoading = false;
+
       console.log(action.payload);
+
       if (action.payload.error) {
         alert('구독을 다시 신청해주세요!');
         document.location.href = '/';
@@ -81,12 +85,12 @@ export const postSlice = createSlice({
     [__mailSubcribe.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log(action.payload);
-      if (action.payload.error) {
-        alert('구독을 다시 신청해주세요!');
-        document.location.href = '/';
-      } else {
-        alert('구독신청 완료!');
-      }
+      // if (action.payload.error) {
+      //   alert('구독을 다시 신청해주세요!');
+      //   document.location.href = '/';
+      // } else {
+      //   alert('구독신청 완료!');
+      // }
     },
     [__mailSubcribe.rejected]: (state, action) => {
       state.isLoading = false;

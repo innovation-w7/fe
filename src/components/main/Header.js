@@ -17,9 +17,9 @@ function Header() {
           </Link>
           <div className="nav-container">
             <div className="nav-search">
-              <button className="search-button">
-                <b>찾기</b>
-              </button>
+              <Link to="/search">
+                <button className="search-button">🔎</button>
+              </Link>
             </div>
             <button
               type="checkbox"
@@ -95,6 +95,7 @@ const Navbar = styled.nav`
   .logo-img {
     vertical-align: middle;
     width: 100%;
+    margin-left: 70px;
   }
   .nav-container {
     display: flex;
@@ -102,6 +103,7 @@ const Navbar = styled.nav`
     justify-content: flex-end;
     background-color: #eae7de;
     justify-content: flex-end;
+
     @media screen and (max-width: 1080px) {
       display: none;
     }
@@ -128,7 +130,7 @@ const Navbar = styled.nav`
     overflow: hidden;
     border-radius: 0;
     border: 1px solid #051619;
-    border-left: 1px #051619;
+    border-left: none;
     background-color: #eae7de;
     font-size: 2rem;
     position: relative;

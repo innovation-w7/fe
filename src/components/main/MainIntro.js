@@ -32,12 +32,18 @@ function MainIntro() {
         </TitleBox>
         <SubscribeHead>
           <div className="sub-inner">
-            <p>✨지금 491,556명이 뉴닉을 읽고 있어요</p>
+            <p>
+              🚀 지금 구독하면 <b>내일 아침</b>에 읽을 수 있어요.
+            </p>
 
             <p style={{ marginTop: '1rem' }}>
+              ✨지금 <b>491,556명</b>이 뉴닉을 읽고 있어요
+            </p>
+
+            <p style={{ marginTop: '2rem' }}>
               세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 바쁜 게 우리 탓은 아니잖아요!&nbsp;
               <br />
-              <span className="desktop-block">월/화/수/목/금 아침마다 세상 돌아가는 소식을 메일로 받아보세요.</span>
+              <p style={{ marginTop: '1rem' }}>월/화/수/목/금 아침마다 세상 돌아가는 소식을 메일로 받아보세요.</p>
             </p>
             <Subscribe>
               <div className="input">

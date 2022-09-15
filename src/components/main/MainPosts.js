@@ -10,7 +10,7 @@ import CategoryList from './CategoryList';
 function MainPosts() {
   const { posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(4);
+  const [visible, setVisible] = useState(8);
   console.log(posts.data, '포스트리스트');
 
   useEffect(() => {

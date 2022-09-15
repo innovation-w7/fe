@@ -4,6 +4,8 @@ import Main from './pages/Main';
 import Detail from './components/detail/Detail';
 import { LoginPage, SignUpPage, ForgotPage } from './pages';
 import Mypage from './pages/Mypage';
+import Search from './components/main/Search';
+import SearchKeyword from './components/main/SearchKeyword';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot" element={<ForgotPage />} />
         <Route path="/profile" element={<Mypage />} />
+        <Route path="/search/:keyword" element={<Search />} />
+        <Route path="/search" element={<SearchKeyword />} />
       </Routes>
     </div>
   );
