@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import waitDochi from '../../static/banner.png';
-import sparkleDochi from '../../static/sparkle.png';
 import { Link } from 'react-router-dom';
 import Marquee from 'react-fast-marquee';
 
@@ -11,7 +10,6 @@ function Footer() {
       <Link to="/">
         <FooterBanner>
           <img className="wait" src={waitDochi} alt="기다리는도치"></img>
-          {/* <img className="sparkle" src={sparkleDochi} alt="스파클도치"></img> */}
           <div className="home-banner-text">구독하러 가기</div>
         </FooterBanner>
       </Link>
@@ -76,7 +74,6 @@ const Footerbar = styled.aside`
   .footer-statics {
     display: flex;
     align-items: center;
-
     background: #eae7de;
     text-align: left;
     font-size: 1.5rem;

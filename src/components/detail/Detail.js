@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import Header from "../main/Header";
-import { api } from "../../shared/api";
-import { __toggleLike } from "../../redux/modules/likeSlice";
-import { __mailSubcribe } from "../../redux/modules/postSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Footer from "../main/Footer";
 
-import Bottonbar from "../main/Bottonbar";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import Header from '../main/Header';
+import { api } from '../../shared/api';
+import { __toggleLike } from '../../redux/modules/likeSlice';
+import { __mailSubcribe } from '../../redux/modules/postSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import Footer from '../main/Footer';
+import Bottonbar from '../main/Bottonbar';
+
 
 function Detail() {
   const params = useParams();
@@ -19,7 +20,7 @@ function Detail() {
   const [heart_count, setHeart_count] = useState(0);
   const [subscribe, setSubscribe] = useState();
 
-  const accessToken = localStorage.getItem("access-token");
+  const accessToken = localStorage.getItem('access-token');
 
   const { likes } = useSelector((state) => state.likes);
 
@@ -59,7 +60,7 @@ function Detail() {
     dispatch(__mailSubcribe(subscribe));
   };
   return (
-    <div style={{ backgroundColor: "#eae7de" }}>
+    <div style={{ backgroundColor: '#eae7de' }}>
       <Header />
       <Posthead>
         <p>{detail.category}</p>

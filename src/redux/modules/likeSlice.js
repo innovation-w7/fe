@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../shared/api";
 
-//const accessToken = localStorage.getItem('access-token');
-
 const initialState = {
   posts: [],
   error: null,

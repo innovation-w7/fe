@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Header from "./Header";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from './Header';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 
 function SearchKeyword() {
   const [word, setWord] = useState();
   const onChangeHandler = (e) => {
     const {
-      target: { value, name },
+      target: { value },
     } = e;
     setWord(value);
   };

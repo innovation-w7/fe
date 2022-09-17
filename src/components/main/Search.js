@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { api } from "../../shared/api";
-import styled from "styled-components";
-import MainPost from "./MainPost";
-import Header from "./Header";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { api } from '../../shared/api';
+import styled from 'styled-components';
+import MainPost from './MainPost';
+import Header from './Header';
+
+
 
 function Search() {
   const params = useParams();
@@ -22,7 +24,6 @@ function Search() {
     <div>
       <div>
         <Header />
-
         <Section>
           <header className="category-head">{keyword} 검색결과</header>
           <div className="category-list">
