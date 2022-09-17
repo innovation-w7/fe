@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
@@ -8,9 +7,7 @@ import { __toggleLike } from '../../redux/modules/likeSlice';
 import { __mailSubcribe } from '../../redux/modules/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../main/Footer';
-import Loading from '../../pages/Loading';
 import Bottonbar from '../main/Bottonbar';
-
 
 function Detail() {
   const params = useParams();
@@ -23,12 +20,9 @@ function Detail() {
 
   const accessToken = localStorage.getItem('access-token');
 
-  console.log(accessToken, '디테일 페이지 토큰');
-
   const { likes } = useSelector((state) => state.likes);
 
   const detailGet = async () => {
-
     try {
       const { data } = await api.get(`/news/${id}`);
       setDetail(data.data);
@@ -36,7 +30,6 @@ function Detail() {
     } catch (error) {
       window.alert(error);
     }
-
   };
   console.log(likes);
 
@@ -66,7 +59,7 @@ function Detail() {
     dispatch(__mailSubcribe(subscribe));
   };
   return (
-    <div style={{ backgroundColor: "#eae7de" }}>
+    <div style={{ backgroundColor: '#eae7de' }}>
       <Header />
       <Posthead>
         <p>{detail.category}</p>

@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../../shared/api';
 
-//const accessToken = localStorage.getItem('access-token');
-
 const initialState = {
   posts: [],
   error: null,
@@ -38,12 +36,10 @@ export const likeSlice = createSlice({
     [__toggleLike.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.likes = action.payload;
-      console.log(state.likes, '성공?');
     },
     [__toggleLike.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-      console.log(state.error, '좋아요 에러');
     },
   },
 });

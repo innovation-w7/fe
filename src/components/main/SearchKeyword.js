@@ -3,14 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Footer from './Footer';
-import Bottonbar from './Bottonbar';
 
 function SearchKeyword() {
   const [word, setWord] = useState();
   const onChangeHandler = (e) => {
     const {
-      target: { value, name },
+      target: { value },
     } = e;
     setWord(value);
   };

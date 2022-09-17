@@ -1,10 +1,8 @@
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import dochi from '../../static/hiDochi.png';
 import { useDispatch } from 'react-redux';
 import { __yesSubcribe } from '../../redux/modules/postSlice';
-
 
 function MainIntro() {
   const dispatch = useDispatch();
@@ -17,21 +15,19 @@ function MainIntro() {
     setSubscribe({ ...subscribe, [name]: value });
   };
 
-
   const subscribePost = () => {
     dispatch(__yesSubcribe(subscribe));
   };
 
   return (
     <div>
-      <header style={{ backgroundColor: "#eae7de", position: "relative" }}>
+      <header style={{ backgroundColor: '#eae7de', position: 'relative' }}>
         <Hellodochi>
           <img className="dochi-img" src={dochi} alt="고슴도치!" />
         </Hellodochi>
         <TitleBox>
           <div className="title-inner">
-            우리가 시간이 없지,{" "}
-            <span className="title-inner2">세상이 안 궁금하냐!</span>
+            우리가 시간이 없지, <span className="title-inner2">세상이 안 궁금하냐!</span>
           </div>
         </TitleBox>
         <SubscribeHead>
@@ -39,45 +35,26 @@ function MainIntro() {
             <p>
               🚀 지금 구독하면 <b>내일 아침</b>에 읽을 수 있어요.
             </p>
-
-
             <p style={{ marginTop: '1rem' }}>
               ✨지금 <b>491,556명</b>이 뉴닉을 읽고 있어요
             </p>
-
             <p style={{ marginTop: '2rem' }}>
               세상 돌아가는 소식, 알고는 싶지만 신문 볼 새 없이 바쁜 게 우리 탓은 아니잖아요!&nbsp;
               <br />
               <p style={{ marginTop: '1rem' }}>월/화/수/목/금 아침마다 세상 돌아가는 소식을 메일로 받아보세요.</p>
-
             </p>
             <Subscribe>
               <div className="input">
-                <input
-                  className="text-field"
-                  name="email"
-                  onChange={onChangeHandler}
-                  placeholder="이메일"
-                />
+                <input className="text-field" name="email" onChange={onChangeHandler} placeholder="이메일" />
               </div>
-              <div style={{ marginTop: "0.5rem" }}>
-                <input
-                  className="text-field"
-                  type="text"
-                  name="nickname"
-                  onChange={onChangeHandler}
-                  placeholder="닉네임"
-                />
+              <div style={{ marginTop: '0.5rem' }}>
+                <input className="text-field" type="text" name="nickname" onChange={onChangeHandler} placeholder="닉네임" />
               </div>
               <div className="checkbox">
-
                 <input type="checkbox" />
 
                 <label>
-                  <span style={{ textDecorationLine: "underline" }}>
-                    개인정보 수집·이용
-                  </span>
-                  에 동의합니다
+                  <span style={{ textDecorationLine: 'underline' }}>개인정보 수집·이용</span>에 동의합니다
                 </label>
                 <p />
                 <button type="submit" onClick={subscribePost} className="subscribe-button">

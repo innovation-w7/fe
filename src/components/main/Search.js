@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { api } from '../../shared/api';
 import styled from 'styled-components';
 import MainPost from './MainPost';
@@ -23,7 +23,6 @@ function Search() {
     <div>
       <div>
         <Header />
-
         <Section>
           <header className="category-head">{keyword} 검색결과</header>
           <div className="category-list">

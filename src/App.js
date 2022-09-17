@@ -1,18 +1,9 @@
-
-import { Routes, Route } from "react-router-dom";
-import Category from "./components/main/Category";
-import Loading from "./pages/Loading";
-import Main from "./pages/Main";
-import Detail from "./components/detail/Detail";
-import { Navigate } from "react-router-dom";
-import {
-  LoginPage,
-  SignUpPage,
-  ForgotPage,
-  MyPage,
-  SettingPage,
-  DeletePage,
-} from "./pages";
+import { Routes, Route } from 'react-router-dom';
+import CategoryPage from './pages/CategoryPage';
+import Main from './pages/Main';
+import Detail from './components/detail/Detail';
+import { Navigate } from 'react-router-dom';
+import { LoginPage, SignUpPage, ForgotPage, MyPage, SettingPage, DeletePage } from './pages';
 import Mypage from './pages/Mypage';
 import Search from './components/main/Search';
 import SearchKeyword from './components/main/SearchKeyword';
@@ -34,7 +25,6 @@ function App() {
         <Route path="/search/:keyword" element={<Search />} />
         <Route path="/search" element={<SearchKeyword />} />
         <Route path="/delete" element={<DeletePage />} />
-
       </Routes>
     </div>
   );
