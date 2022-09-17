@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
@@ -8,6 +9,7 @@ import { __mailSubcribe } from '../../redux/modules/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../main/Footer';
 import Bottonbar from '../main/Bottonbar';
+
 
 function Detail() {
   const params = useParams();
@@ -31,12 +33,11 @@ function Detail() {
       window.alert(error);
     }
   };
-  console.log(likes);
 
   const payload = [id, accessToken];
   const likeButtonHandler = async () => {
     dispatch(__toggleLike(payload));
-    if (likes.data == '좋아요 취소') {
+    if (likes.data === "좋아요 취소") {
       return setHeart_count - 1;
     } else {
       return setHeart_count + 1;
@@ -80,13 +81,23 @@ function Detail() {
       <SubscribeForm>
         <div className="form-content">
           <div className="form-input">
-            <input className="input" name="email" onChange={onChangeHandler}></input>
+            <input
+              className="input"
+              name="email"
+              onChange={onChangeHandler}
+            ></input>
           </div>
-          <button type="submit" className="post-input" onClick={subscribeButton}>
+          <button
+            type="submit"
+            className="post-input"
+            onClick={subscribeButton}
+          >
             뉴스레터 구독하기
           </button>
         </div>
-        <SubText>구독할 경우 개인정보 수집·이용과 광고성 정보 수신에 동의하게 됩니다.</SubText>
+        <SubText>
+          구독할 경우 개인정보 수집·이용과 광고성 정보 수신에 동의하게 됩니다.
+        </SubText>
       </SubscribeForm>
       <Footer />
       <Bottonbar />

@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
 import api from "../../shared/api";
-
 
 const initialState = {
   posts: [],
@@ -10,8 +8,6 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
 };
-const accessToken = localStorage.getItem('access-token');
-
 
 export const __getPostsThunk = createAsyncThunk(
   "GET_POSTS",
@@ -22,36 +18,45 @@ export const __getPostsThunk = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
-
   }
 );
 
-export const __yesSubcribe = createAsyncThunk('YES_SUBSCRIBE', async (payload, thunkAPI) => {
-  try {
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    console.log(payload);
-    const { data } = await api.post('/main/subscribe', payload, { headers: headers });
-    console.log(data);
-    return thunkAPI.fulfillWithValue(data);
-  } catch (error) {
-    alert(error);
-    return thunkAPI.rejectWithValue(error);
+export const __yesSubcribe = createAsyncThunk(
+  "YES_SUBSCRIBE",
+  async (payload, thunkAPI) => {
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      const { data } = await api.post("/main/subscribe", payload, {
+        headers: headers,
+      });
+
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      alert(error);
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
-export const __mailSubcribe = createAsyncThunk('MAIL_SUBSCRIBE', async (payload, thunkAPI) => {
-  try {
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    const { data } = await api.post('/detail/subscribe', payload, { headers: headers });
-    return thunkAPI.fulfillWithValue(data);
-  } catch (error) {
-    alert(error);
-    return thunkAPI.rejectWithValue(error);
+);
+export const __mailSubcribe = createAsyncThunk(
+  "MAIL_SUBSCRIBE",
+  async (payload, thunkAPI) => {
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const { data } = await api.post("/detail/subscribe", payload, {
+        headers: headers,
+      });
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      alert(error);
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);
 export const postSlice = createSlice({
   name: "posts",
   initialState,
@@ -72,13 +77,11 @@ export const postSlice = createSlice({
     [__yesSubcribe.fulfilled]: (state, action) => {
       state.isLoading = false;
 
-      console.log(action.payload);
-
       if (action.payload.error) {
-        alert('구독을 다시 신청해주세요!');
-        document.location.href = '/';
+        alert("구독을 다시 신청해주세요!");
+        document.location.href = "/";
       } else {
-        alert('구독신청 완료!');
+        alert("구독신청 완료!");
       }
     },
     [__yesSubcribe.rejected]: (state, action) => {
@@ -91,7 +94,7 @@ export const postSlice = createSlice({
     },
     [__mailSubcribe.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
+
       // if (action.payload.error) {
       //   alert('구독을 다시 신청해주세요!');
       //   document.location.href = '/';

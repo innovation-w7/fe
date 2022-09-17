@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import MainPost from './MainPost';
 import Header from './Header';
 
+
+
 function Search() {
   const params = useParams();
   const keyword = params.keyword;
@@ -13,7 +15,6 @@ function Search() {
     const { data } = await api.get(`/news/search/${keyword}`);
 
     setSearchList({ ...data });
-    console.log(data);
   };
 
   useEffect(() => {

@@ -62,7 +62,7 @@ const LoginForm = () => {
             alert('로그인에 실패하였습니다.');
           }
         })
-        .catch((err) => {
+        .catch(() => {
           setMessage("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
         });
     }

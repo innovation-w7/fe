@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { api } from '../../shared/api';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { api } from "../../shared/api";
 
 const initialState = {
   posts: [],
@@ -8,25 +8,30 @@ const initialState = {
   isSuccess: false,
 };
 
-export const __toggleLike = createAsyncThunk('ADD_LIKE', async (payload, thunkAPI) => {
-  const newsId = payload[0];
-  const accessToken = payload[1];
+export const __toggleLike = createAsyncThunk(
+  "ADD_LIKE",
+  async (payload, thunkAPI) => {
+    const newsId = payload[0];
+    const accessToken = payload[1];
 
-  try {
-    const headers = {
-      'Content-Type': 'application/json',
-      'access-token': accessToken,
-    };
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+        "access-token": accessToken,
+      };
 
-    const { data } = await api.post(`/auth/news/${newsId}`, newsId, { headers: headers });
-    return thunkAPI.fulfillWithValue(data);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+      const { data } = await api.post(`/auth/news/${newsId}`, newsId, {
+        headers: headers,
+      });
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-});
+);
 
 export const likeSlice = createSlice({
-  name: 'likes',
+  name: "likes",
   initialState,
   reducers: {},
   extraReducers: {
